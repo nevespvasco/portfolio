@@ -39,7 +39,7 @@
 
 <script lang="ts" setup>
 const handleBookingRedirect = () => {
-  window.location.href = "https://cal.com/vascopneves";
+  window.location.href = "https://book.schedly.io/nevespvasco";
 };
 </script>
 
