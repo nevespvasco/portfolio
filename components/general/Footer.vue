@@ -6,15 +6,15 @@
     <div class="footer-icons">
       <IconsGithub
         :size="{ width: '1.5em', height: '1.5em' }"
-        @click="handleIconRedirect('https://github.com/vasconevesxd')"
+        @click="handleIconRedirect('https://github.com/nevespvasco')"
       ></IconsGithub>
       <IconsLinkedin
         :size="{ width: '1.5em', height: '1.5em' }"
-        @click="handleIconRedirect('https://www.linkedin.com/in/vascopneves/')"
+        @click="handleIconRedirect('https://www.linkedin.com/in/nevespvasco')"
       ></IconsLinkedin>
       <IconsEmail
         :size="{ width: '1.5em', height: '1.5em' }"
-        @click="handleIconRedirect('mailto:vascopneves.jobs@gmail.com')"
+        @click="handleIconRedirect('mailto:nevespvasco+jobs@gmail.com')"
       ></IconsEmail>
     </div>
   </footer>

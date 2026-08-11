@@ -14,7 +14,7 @@
 import { SpeedInsights } from "@vercel/speed-insights/vue";
 
 useHead({
-  title: "vasconevesxd",
+  title: "vasconeves",
   meta: [
     {
       name: "description",

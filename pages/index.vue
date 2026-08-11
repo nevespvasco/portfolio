@@ -114,19 +114,19 @@ const socialLinks = ref<
     id: 0,
     title: "GitHub",
     iconName: markRaw(IconsGithub),
-    link: "https://github.com/vasconevesxd",
+    link: "https://github.com/nevespvasco",
   },
   {
     id: 1,
     title: "Linkedin",
     iconName: markRaw(IconsLinkedin),
-    link: "https://www.linkedin.com/in/vascopneves/",
+    link: "https://www.linkedin.com/in/nevespvasco",
   },
   {
     id: 2,
     title: "Email",
     iconName: markRaw(IconsEmail),
-    link: "mailto:vascopneves.jobs@gmail.com",
+    link: "mailto:nevespvasco+jobs@gmail.com",
   },
 ]);
 
