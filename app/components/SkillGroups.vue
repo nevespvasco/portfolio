@@ -62,6 +62,10 @@ const groupId = (name: string) =>
   background-color: var(--color-surface);
   font-weight: 400;
   white-space: nowrap;
+  // The chips lift on hover, so they shouldn't also show a text cursor or
+  // pick up stray selections; screen readers still read the names.
+  cursor: default;
+  user-select: none;
   transition:
     border-color 0.2s ease,
     transform 0.2s ease;
