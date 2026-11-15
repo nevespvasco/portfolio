@@ -98,3 +98,13 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+/** The projects either side of `slug` in list order, for case-study navigation. */
+export function adjacentProjects(
+  slug: string,
+  list: readonly Project[] = projects,
+): { previous?: Project; next?: Project } {
+  const index = list.findIndex((p) => p.slug === slug);
+  if (index === -1) return {};
+  return { previous: list[index - 1], next: list[index + 1] };
+}

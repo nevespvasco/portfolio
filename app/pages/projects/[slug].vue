@@ -20,12 +20,31 @@
       </section>
 
       <ContactCta>Want the 10-minute walkthrough?</ContactCta>
+
+      <nav v-if="previous || next" class="project-nav" aria-label="More projects">
+        <NuxtLink
+          v-if="previous"
+          :to="`/projects/${previous.slug}`"
+          class="project-nav-link project-nav-link--previous"
+        >
+          <span class="project-nav-label">← Previous project</span>
+          <span class="project-nav-name">{{ previous.name }}</span>
+        </NuxtLink>
+        <NuxtLink
+          v-if="next"
+          :to="`/projects/${next.slug}`"
+          class="project-nav-link project-nav-link--next"
+        >
+          <span class="project-nav-label">Next project →</span>
+          <span class="project-nav-name">{{ next.name }}</span>
+        </NuxtLink>
+      </nav>
     </article>
   </UiPageContainer>
 </template>
 
 <script lang="ts" setup>
-import { projects } from "~/data/projects";
+import { adjacentProjects, projects } from "#shared/projects";
 import { absoluteUrl, site } from "#shared/site";
 
 const route = useRoute();
@@ -35,17 +54,22 @@ if (!project) {
   throw createError({ statusCode: 404, statusMessage: "Project not found" });
 }
 
-useHead({
-  title: `${project.name} · ${site.name}`,
-  meta: [
-    { name: "description", content: project.outcome },
-    { property: "og:title", content: `${project.name} · ${site.name}` },
-    { property: "og:description", content: project.outcome },
-  ],
-  link: [
-    { rel: "canonical", href: absoluteUrl(`/projects/${project.slug}`) },
-  ],
+const title = `${project.name} · ${site.name}`;
+const url = absoluteUrl(`/projects/${project.slug}`);
+
+useHead({ link: [{ rel: "canonical", href: url }] });
+useSeoMeta({
+  title,
+  description: project.outcome,
+  ogType: "article",
+  ogTitle: title,
+  ogDescription: project.outcome,
+  ogUrl: url,
+  ogImage: absoluteUrl("/og.jpg"),
+  twitterCard: "summary_large_image",
 });
+
+const { previous, next } = adjacentProjects(project.slug);
 </script>
 
 <style lang="scss" scoped>
@@ -71,5 +95,49 @@ useHead({
 
 .bullets li {
   margin-bottom: var(--space-2);
+}
+
+.project-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.project-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+
+  &:hover {
+    background-color: var(--color-surface);
+    border-color: var(--color-border-strong);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+.project-nav-link--next {
+  grid-column: 2;
+  text-align: right;
+}
+
+.project-nav-label {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 400;
+}
+
+.project-nav-name {
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  font-weight: 700;
 }
 </style>

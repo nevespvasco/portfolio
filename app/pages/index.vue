@@ -63,7 +63,7 @@
 </template>
 
 <script lang="ts" setup>
-import { projects } from "~/data/projects";
+import { projects } from "#shared/projects";
 import { skillGroups } from "~/data/skills";
 import { contactLinks, locationLabel, site } from "#shared/site";
 </script>

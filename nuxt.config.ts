@@ -20,6 +20,10 @@ export default defineNuxtConfig({
     },
     fallbackToApi: false,
   },
+  nitro: {
+    // The sitemap is generated from the projects list at build time.
+    prerender: { routes: ["/sitemap.xml"] },
+  },
   app: {
     pageTransition: { name: "page", mode: "out-in" },
     head: {

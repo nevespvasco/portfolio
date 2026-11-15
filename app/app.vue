@@ -24,7 +24,7 @@ useHead({
     { property: "og:description", content: site.description },
     { property: "og:url", content: absoluteUrl("/") },
     { property: "og:image", content: ogImage },
-    { name: "twitter:card", content: "summary" },
+    { name: "twitter:card", content: "summary_large_image" },
   ],
   link: [{ rel: "canonical", href: absoluteUrl("/") }],
   script: [

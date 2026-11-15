@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Project } from "~/data/projects";
+import type { Project } from "#shared/projects";
 
 const props = defineProps<{ project: Project }>();
 const href = computed(() => `/projects/${props.project.slug}`);
