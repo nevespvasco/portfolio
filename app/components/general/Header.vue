@@ -48,6 +48,7 @@ import type { NavItem } from "~/utils/navigation";
 const navItems: { id: NavItem; label: string; to: string }[] = [
   { id: "home", label: "Home", to: "/" },
   { id: "projects", label: "Projects", to: projectsListPath },
+  { id: "experience", label: "Experience", to: "/experience" },
 ];
 
 const route = useRoute();

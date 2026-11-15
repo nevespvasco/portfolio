@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+import { currentRole, education } from "#shared/experience";
 import { absoluteUrl, site } from "#shared/site";
 
 const title = `${site.name} · ${site.role}`;
@@ -42,6 +43,8 @@ useHead({
         url: absoluteUrl("/"),
         image: ogImage,
         email: `mailto:${site.email}`,
+        worksFor: { "@type": "Organization", name: currentRole.company },
+        alumniOf: education.map((item) => ({ "@type": "EducationalOrganization", name: item.institution })),
         address: {
           "@type": "PostalAddress",
           addressLocality: site.location.city,
