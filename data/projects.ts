@@ -98,12 +98,3 @@ export const projects: Project[] = [
     ],
   },
 ];
-
-export const workHighlights = [
-  {
-    name: "Enterprise migration at Siemens",
-    outcome:
-      "Led the SAP UI5 to Vue 3 migration of a 12-screen, 30+ component app used by ~1,800 people, and designed the Vue 3 component library the 13-person team adopted.",
-    tags: ["Vue 3", "TypeScript", "Design systems"],
-  },
-];

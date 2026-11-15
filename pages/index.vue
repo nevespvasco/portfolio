@@ -65,13 +65,6 @@
               <a v-if="project.repo" :href="project.repo">Repository</a>
             </p>
           </li>
-          <li v-for="work in workHighlights" :key="work.name" class="card">
-            <h3 class="card-title">{{ work.name }}</h3>
-            <p class="card-outcome">{{ work.outcome }}</p>
-            <ul class="tag-list">
-              <li v-for="tag in work.tags" :key="tag" class="tag">{{ tag }}</li>
-            </ul>
-          </li>
         </ul>
       </section>
 
@@ -140,7 +133,7 @@ import {
   IconsTailwindcss,
 } from "#components";
 import { type Component, markRaw } from "vue";
-import { projects, workHighlights } from "~/data/projects";
+import { projects } from "~/data/projects";
 
 const socialLinks = ref<
   {
