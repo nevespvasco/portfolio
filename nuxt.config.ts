@@ -41,9 +41,5 @@ export default defineNuxtConfig({
   },
   app: {
     pageTransition: { name: "page", mode: "out-in" },
-    head: {
-      // viewport-fit=cover lets the fixed mobile nav respect the safe area.
-      viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
-    },
   },
 });
