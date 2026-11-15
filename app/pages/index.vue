@@ -22,6 +22,11 @@
       </ul>
       <h1 id="hero-name" class="name">{{ site.name }}</h1>
       <p class="role">{{ site.role }}</p>
+      <p class="current">
+        {{ currentRole.title }} at {{ currentRole.company }} · previously
+        {{ previousRole.title }} at {{ previousRole.company }}.
+        <NuxtLink to="/experience">Full experience →</NuxtLink>
+      </p>
       <ul class="contact-list">
         <li v-for="link in contactLinks" :key="link.label">
           <UiLinkButton :to="link.url" :icon="link.icon">
@@ -60,6 +65,7 @@
 </template>
 
 <script lang="ts" setup>
+import { currentRole, previousRole } from "#shared/experience";
 import { projects, projectsListPath } from "#shared/projects";
 import { skillGroups } from "~/data/skills";
 import { contactLinks, copy, locationLabel, site } from "#shared/site";
@@ -124,6 +130,16 @@ const featuredProjects = projects.filter((project) => project.featured);
   color: var(--color-text-muted);
   font-size: var(--text-2xl);
   line-height: var(--leading-tight);
+}
+
+.current {
+  align-self: stretch;
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-muted);
+
+  a {
+    white-space: nowrap;
+  }
 }
 
 .contact-list {
