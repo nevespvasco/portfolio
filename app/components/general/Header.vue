@@ -81,7 +81,7 @@ function placeIndicator() {
   indicator.width = link.offsetWidth;
 }
 
-watch(active, () => nextTick(placeIndicator), { flush: "post" });
+watch(active, placeIndicator, { flush: "post" });
 
 // First placement and size changes (fonts loading, resizing) jump straight
 // there; only a change of page slides. The new position is rendered and its
@@ -181,8 +181,10 @@ onBeforeUnmount(() => {
   font-weight: 500;
   cursor: pointer;
 
-  &:hover {
-    background-color: var(--color-surface);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-surface);
+    }
   }
 }
 
@@ -221,6 +223,14 @@ onBeforeUnmount(() => {
   animation-delay: calc(var(--i) * 60ms + 40ms);
 }
 
+// The header's Book a call sits in the closed panel on mobile: don't keep
+// animating its bubbles out of sight.
+@media (max-width: 767px) {
+  .menu:not(.menu--open) :deep(.bubble) {
+    animation-play-state: paused;
+  }
+}
+
 @keyframes nav-item-in {
   from {
     opacity: 0;
@@ -245,11 +255,16 @@ onBeforeUnmount(() => {
   font-size: var(--text-base);
   font-weight: 400;
   text-decoration: none;
-  transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease;
 
-  &:hover {
+  // Only where hover is real, so a tap on a tablet doesn't leave it stuck.
+  // Keyboard focus gets the same look, plus its ring.
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-surface);
+    }
+  }
+
+  &:focus-visible {
     background-color: var(--color-surface);
   }
 }
@@ -318,14 +333,26 @@ onBeforeUnmount(() => {
       transition: transform 0.25s ease;
     }
 
-    &:hover::after,
+    @media (hover: hover) {
+      &:hover::after {
+        transform: scaleX(1);
+      }
+    }
+
     &:focus-visible::after {
       transform: scaleX(1);
     }
   }
 
-  .nav-item--active::after {
-    visibility: hidden;
+  // The sliding bar marks the active item here, so it drops the mobile
+  // row highlight (which would otherwise jump between items).
+  .nav-item--active {
+    border-color: transparent;
+    background-color: transparent;
+
+    &::after {
+      visibility: hidden;
+    }
   }
 
   // The active marker: a 1px-wide bar scaled to the active link's width and
@@ -358,7 +385,6 @@ onBeforeUnmount(() => {
 @media (prefers-reduced-motion: reduce) {
   .menu,
   .menu.menu--open,
-  .nav-item,
   .nav-item::after,
   .nav-indicator--animated {
     transition: none;
