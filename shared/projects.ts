@@ -52,6 +52,10 @@ export const projects: Project[] = [
     role: "Solo developer",
     status: "production",
     featured: true,
+    cover: {
+      src: "/projects/cirnota/cover.webp",
+      alt: "The Cirnota landing page: a headline about logging every surgery over an operating-theatre lamp.",
+    },
     outcome:
       "A surgical portfolio for doctors in Portugal, in production: log surgeries on the day, see what is left for residency minimums, and export a CV as PDF or Word.",
     tags: ["React 19", "TypeScript", "Vite", "NestJS", "PostgreSQL"],
@@ -98,6 +102,27 @@ export const projects: Project[] = [
     role: "Solo developer",
     status: "production",
     featured: true,
+    cover: {
+      src: "/projects/a-minha-rua/cover.webp",
+      alt: "An isometric pixel-art block of Lisbon with terracotta roofs, trees and cobbled streets.",
+    },
+    gallery: [
+      {
+        src: "/projects/a-minha-rua/gallery-1.webp",
+        alt: "The Lisbon map in pixel art with neighbourhood labels, rain and cloud shadows over the Tagus.",
+        caption: "The Lisbon map: the city in pixel art, with the sun and the weather where they really are.",
+      },
+      {
+        src: "/projects/a-minha-rua/gallery-2.webp",
+        alt: "A painted isometric preview of Alfama, a dense hillside of roofs and narrow streets.",
+        caption: "A painted preview of Alfama, from the roughly 300 m square around it.",
+      },
+      {
+        src: "/projects/a-minha-rua/gallery-3.webp",
+        alt: "The A Minha Rua landing page with an address search and three steps to a poster.",
+        caption: "The landing page: search an address, pick a style, download the files.",
+      },
+    ],
     outcome:
       "Turns any address in Portugal into an isometric pixel-art poster, drawn from OpenStreetMap with the real sun position and live weather.",
     tags: ["Nuxt 4", "Vue 3", "TypeScript", "three.js", "Stripe"],
@@ -143,6 +168,22 @@ export const projects: Project[] = [
     role: "Solo developer",
     status: "open-source",
     featured: true,
+    cover: {
+      src: "/projects/filebridge/cover.webp",
+      alt: "The filebridge home screen: a drop zone, a transfer that needs attention and recent transfers.",
+    },
+    gallery: [
+      {
+        src: "/projects/filebridge/gallery-1.webp",
+        alt: "The first step of the filebridge wizard, asking what to send, with pinned folders and disks.",
+        caption: "Step one: choose what to send. filebridge only reads the source. Screens show demo data.",
+      },
+      {
+        src: "/projects/filebridge/gallery-2.webp",
+        alt: "A finished transfer reporting 1,234 files copied and verified one by one with SHA-256.",
+        caption: "A verified transfer: every file at the destination is checked against its original with SHA-256.",
+      },
+    ],
     outcome:
       "Turned a 31-hour manual server migration into a 5-step wizard that resumes after a crash and verifies every file with SHA-256.",
     tags: ["Vue 3", "TypeScript", "Tauri 2", "Rust", "SQLite"],
@@ -189,6 +230,10 @@ export const projects: Project[] = [
     year: 2026,
     role: "Solo developer",
     status: "open-source",
+    cover: {
+      src: "/projects/pushguard/cover.webp",
+      alt: "A terminal where PushGuard blocks a git push and lists one error and one warning.",
+    },
     outcome:
       "AI code review on every git push, with three strictness presets and a fail-open design that never blocks a push.",
     tags: ["TypeScript", "Node.js", "CLI", "LLM APIs"],
