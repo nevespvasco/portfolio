@@ -25,7 +25,7 @@
       <p class="current">
         {{ currentRole.title }} at {{ currentRole.company }} · previously
         {{ previousRole.title }} at {{ previousRole.company }}.
-        <NuxtLink to="/experience">Full experience →</NuxtLink>
+        <NuxtLink :to="experiencePath">Full experience →</NuxtLink>
       </p>
       <ul class="contact-list">
         <li v-for="link in contactLinks" :key="link.label">
@@ -65,7 +65,7 @@
 </template>
 
 <script lang="ts" setup>
-import { currentRole, previousRole } from "#shared/experience";
+import { currentRole, experiencePath, previousRole } from "#shared/experience";
 import { projects, projectsListPath } from "#shared/projects";
 import { skillGroups } from "~/data/skills";
 import { contactLinks, copy, locationLabel, site } from "#shared/site";

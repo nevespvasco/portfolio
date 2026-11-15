@@ -1,8 +1,11 @@
+import { experiencePath } from "#shared/experience";
+import { projectsListPath } from "#shared/projects";
+
 export type NavItem = "home" | "projects" | "experience";
 
 const sections: { item: Exclude<NavItem, "home">; prefix: string }[] = [
-  { item: "projects", prefix: "/projects" },
-  { item: "experience", prefix: "/experience" },
+  { item: "projects", prefix: projectsListPath },
+  { item: "experience", prefix: experiencePath },
 ];
 
 /**

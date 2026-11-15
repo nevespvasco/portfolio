@@ -72,7 +72,7 @@
                     loading="lazy"
                     :img-attrs="{ class: 'gallery-image' }"
                   />
-                  <span class="visually-hidden">(opens the full-size image)</span>
+                  <span class="visually-hidden">(opens the full-size image in a new tab)</span>
                 </a>
                 <figcaption v-if="image.caption">{{ image.caption }}</figcaption>
               </figure>
@@ -114,7 +114,6 @@ import {
   projectsListPath,
   statusLabels,
 } from "#shared/projects";
-import { absoluteUrl, site } from "#shared/site";
 
 const route = useRoute();
 const project = projects.find((p) => p.slug === route.params.slug);
@@ -123,20 +122,13 @@ if (!project) {
   throw createError({ statusCode: 404, statusMessage: "Project not found" });
 }
 
-const title = `${project.name} · ${site.name}`;
-const url = absoluteUrl(projectPath(project.slug));
-
-useHead({ link: [{ rel: "canonical", href: url }] });
-useSeoMeta({
-  title,
+usePageSeo({
+  title: project.name,
   description: project.outcome,
-  ogType: "article",
-  ogTitle: title,
-  ogDescription: project.outcome,
-  ogUrl: url,
-  ogImage: absoluteUrl(projectOgImage(project)),
-  ogImageAlt: project.cover?.alt,
-  twitterCard: "summary_large_image",
+  path: projectPath(project.slug),
+  image: projectOgImage(project),
+  imageAlt: project.cover?.alt,
+  type: "article",
 });
 
 const { previous, next } = adjacentProjects(project.slug);
@@ -346,7 +338,7 @@ const { previous, next } = adjacentProjects(project.slug);
 
   .facts {
     position: sticky;
-    top: 5.5rem;
+    top: var(--sticky-offset);
   }
 }
 </style>

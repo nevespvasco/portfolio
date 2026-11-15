@@ -6,8 +6,8 @@ export interface Role {
   title: string;
   /** "YYYY-MM". */
   start: string;
-  /** "YYYY-MM", or "present". */
-  end: string;
+  /** "YYYY-MM"; left out for the role held today. */
+  end?: string;
   location?: string;
   paragraphs?: string[];
   bullets?: string[];
@@ -27,7 +27,6 @@ export const roles: Role[] = [
     company: "OFFX",
     title: "Frontend Software Engineer",
     start: "2025-03",
-    end: "present",
     paragraphs: [
       "OFFX is a venue for private-market liquidity: locked and liquid tokens, pre-IPO equity secondaries, fund secondaries and SPVs, used by 1,000+ institutional counterparties.",
       "I work on the frontend of the trading platform across the whole deal lifecycle: exploring assets, creating listings with premium/discount pricing and public, targeted or private distribution, negotiating bids and offers, and following deals through to settlement, including token lockup and unlock data and price-history charts.",
@@ -133,21 +132,19 @@ export const education: Education[] = [
   },
 ];
 
+/** The experience page. */
+export const experiencePath = "/experience";
+
 /** The role with no end date: what the owner does today. */
-export const currentRole = roles.find((role) => role.end === "present") ?? roles[0]!;
+export const currentRole = roles.find((role) => !role.end) ?? roles[0]!;
 
 /** The most recent role that has ended. */
-export const previousRole = roles.find((role) => role.end !== "present") ?? roles[1]!;
+export const previousRole = roles.find((role) => role.end) ?? roles[1]!;
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-function formatMonth(value: string): string {
-  if (value === "present") return "Present";
+/** "Mar 2025" from "YYYY-MM". */
+export function formatMonth(value: string): string {
   const [year, month] = value.split("-");
   return `${months[Number(month) - 1]} ${year}`;
-}
-
-/** "Mar 2025 – Present", from "YYYY-MM" values. */
-export function formatPeriod(start: string, end: string): string {
-  return `${formatMonth(start)} – ${formatMonth(end)}`;
 }

@@ -1,6 +1,5 @@
 <template>
   <ul class="project-links">
-    <slot />
     <li v-if="project.live">
       <a :href="project.live">
         Live site<Icon name="material-symbols:arrow-outward" aria-hidden="true" />

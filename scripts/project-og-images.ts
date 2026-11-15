@@ -12,6 +12,10 @@ for (const slug of await readdir(root)) {
   if (!(await stat(dir)).isDirectory()) continue;
   const cover = join(dir, "cover.webp");
   const out = join(dir, "og.jpg");
+  if (!(await stat(cover).catch(() => null))) {
+    console.log("skipped", slug, "(no cover.webp)");
+    continue;
+  }
   await sharp(cover)
     .resize(1200, 630, { fit: "cover", position: "top" })
     .jpeg({ quality: 85, mozjpeg: true })

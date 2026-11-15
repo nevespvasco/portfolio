@@ -41,6 +41,7 @@
 </template>
 
 <script lang="ts" setup>
+import { experiencePath } from "#shared/experience";
 import { projectsListPath } from "#shared/projects";
 import { site } from "#shared/site";
 import type { NavItem } from "~/utils/navigation";
@@ -48,7 +49,7 @@ import type { NavItem } from "~/utils/navigation";
 const navItems: { id: NavItem; label: string; to: string }[] = [
   { id: "home", label: "Home", to: "/" },
   { id: "projects", label: "Projects", to: projectsListPath },
-  { id: "experience", label: "Experience", to: "/experience" },
+  { id: "experience", label: "Experience", to: experiencePath },
 ];
 
 const route = useRoute();
@@ -99,7 +100,7 @@ onBeforeUnmount(() => {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  max-width: 72rem;
+  max-width: calc(var(--wide-width) + 2 * var(--gutter));
   margin: 0 auto;
   padding: var(--space-3) var(--gutter);
 }
