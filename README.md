@@ -16,10 +16,16 @@ npm run preview   # serve the production build locally
 npm run lint      # ESLint (npm run lint:fix to autofix)
 npm run typecheck # vue-tsc via nuxt typecheck
 npm test          # Vitest unit tests (*.test.ts next to the code)
-npm run test:a11y # axe + mobile-menu checks with Playwright against the production build (build first)
+npm run test:a11y # Playwright against the production build (build first): axe, UI and smoke checks in every browser
 ```
 
-CI runs lint, typecheck, unit tests, build and the accessibility checks on every pull request and push to `main`. Dependabot opens grouped weekly update PRs.
+CI runs lint, typecheck, unit tests, build and the Playwright checks on every pull request and push to `main`. Dependabot opens grouped weekly update PRs.
+
+## Browser support
+
+The Playwright checks run in five projects: Desktop Chrome, Android Chrome (Pixel), Safari on iOS (WebKit with an iPhone profile), desktop Safari (WebKit) and desktop Firefox. Brave, Edge and Opera are Chromium, so the Chrome projects cover them. Run a single one with `npx playwright test --project=ios-safari`.
+
+WebKit in CI is close to Safari but not the same thing, so after visual changes still check by hand on a real iPhone (and once in Brave with Shields on).
 
 ## Where the content lives
 

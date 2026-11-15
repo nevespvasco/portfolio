@@ -57,9 +57,12 @@ const bubbleCount = 8;
     transform 0.2s ease,
     box-shadow 0.2s ease;
 
-  &:hover {
-    box-shadow: 0 4px 16px rgb(0 220 130 / 35%);
-    transform: translateY(-1px);
+  // Only where hover is real: on touch screens it would stick after a tap.
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: 0 4px 16px rgb(0 220 130 / 35%);
+      transform: translateY(-1px);
+    }
   }
 
   &:focus-visible {

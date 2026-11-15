@@ -47,6 +47,12 @@ test.describe("mobile menu", () => {
     await button.click();
     await expect(button).toHaveAttribute("aria-expanded", "true");
     await expect(menu.getByRole("link", { name: "Experience" })).toBeVisible();
+    // Let the open animation finish: axe reads contrast mid-fade otherwise.
+    await page.waitForFunction(() =>
+      document.getAnimations().every(
+        (a) => a.effect?.getTiming().iterations === Infinity || a.playState !== "running",
+      ),
+    );
 
     const { violations } = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"])

@@ -33,6 +33,7 @@
           </ul>
           <!-- Desktop only: one bar that slides under the active item. -->
           <span
+            ref="indicatorEl"
             class="nav-indicator"
             :class="{ 'nav-indicator--animated': indicator.animated }"
             :style="indicatorStyle"
@@ -63,10 +64,9 @@ const route = useRoute();
 const active = computed(() => activeNavItem(route.path));
 
 // The sliding indicator is measured from the active link, so it's placed only
-// once mounted and again whenever the active item or the list's size changes
-// (fonts loading, resizing). Transitions switch on after the first placement,
-// so landing on a page never animates.
+// once mounted and again whenever the active item or the list's size changes.
 const navList = ref<HTMLElement>();
+const indicatorEl = ref<HTMLElement>();
 const indicator = reactive({ x: 0, width: 0, visible: false, animated: false });
 const indicatorStyle = computed(() => ({
   opacity: indicator.visible ? 1 : 0,
@@ -82,6 +82,18 @@ function placeIndicator() {
 }
 
 watch(active, () => nextTick(placeIndicator), { flush: "post" });
+
+// First placement and size changes (fonts loading, resizing) jump straight
+// there; only a change of page slides. The new position is rendered and its
+// style flushed (the forced reflow) before the transition is switched back
+// on, or the browser would animate to it anyway.
+async function placeWithoutAnimating() {
+  indicator.animated = false;
+  placeIndicator();
+  await nextTick();
+  void indicatorEl.value?.offsetWidth;
+  indicator.animated = true;
+}
 
 let resizeObserver: ResizeObserver | undefined;
 
@@ -109,11 +121,8 @@ onMounted(() => {
   document.addEventListener("keydown", onKeydown);
   document.addEventListener("pointerdown", onPointerDown);
 
-  placeIndicator();
-  requestAnimationFrame(() => {
-    indicator.animated = true;
-  });
-  resizeObserver = new ResizeObserver(placeIndicator);
+  placeWithoutAnimating();
+  resizeObserver = new ResizeObserver(placeWithoutAnimating);
   if (navList.value) resizeObserver.observe(navList.value);
 });
 onBeforeUnmount(() => {
