@@ -1,6 +1,6 @@
 # vasconeves.com
 
-Personal portfolio of Vasco Neves, Senior Frontend Engineer. Built with Nuxt and deployed on Vercel.
+Personal portfolio of Vasco Neves, Senior Frontend Engineer. Built with Nuxt 4 and deployed on Vercel.
 
 ## Requirements
 
@@ -17,7 +17,7 @@ npm run preview   # serve the production build locally
 
 ## Where the content lives
 
-- `data/projects.ts`: project cards and case studies (`/projects/<slug>`)
-- `pages/index.vue`: home page (bio, skills)
-- `components/general/`: header and footer
+- `app/data/projects.ts`: project cards and case studies (`/projects/<slug>`)
+- `app/pages/index.vue`: home page (bio, skills)
+- `app/components/general/`: header and footer
 - `public/`: favicon, Open Graph image, `robots.txt`, `sitemap.xml`

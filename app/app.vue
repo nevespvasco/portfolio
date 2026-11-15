@@ -1,5 +1,4 @@
 <template>
-  <SpeedInsights />
   <div id="app">
     <NuxtLayout>
       <div id="page--background"></div>
@@ -11,8 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { SpeedInsights } from "@vercel/speed-insights/vue";
-
 const description =
   "Vasco Neves, Senior Frontend Engineer in Lisbon. Data-heavy Vue 3, Nuxt and TypeScript apps, tested with Vitest and Playwright.";
 

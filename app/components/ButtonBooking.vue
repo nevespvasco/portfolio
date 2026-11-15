@@ -38,6 +38,8 @@
 </template>
 
 <style lang="scss" scoped>
+@use "sass:math";
+
 $prime: var(--green);
 $second: var(--scheme-aqua-200);
 
@@ -83,7 +85,7 @@ svg {
       @for $bubble from 1 through 10 {
         &:nth-child(#{$bubble}) {
           $size: 25px;
-          left: (random(90) + 10) + px;
+          left: (math.random(90) + 10) + px;
           width: $size;
           height: $size;
           animation: move-#{$bubble} #{3 + $bubble * 0.02}s infinite;
@@ -100,7 +102,7 @@ svg {
       transform: translate(0, 0);
     }
     99% {
-      transform: translate(0, -(random(80) + 50) + px);
+      transform: translate(0, -(math.random(80) + 50) + px);
     }
     100% {
       transform: translate(0, 0);
