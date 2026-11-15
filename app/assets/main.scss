@@ -58,6 +58,8 @@
   /* Layout */
   --content-width: 46rem;
   --gutter: 1.25rem;
+  /* Room kept free below the content for the fixed mobile nav bar. */
+  --mobile-bar-space: 5.5rem;
 }
 
 *,
@@ -108,6 +110,12 @@ body::-webkit-scrollbar-thumb {
 #app {
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 767px) {
+  #app {
+    padding-bottom: calc(var(--mobile-bar-space) + env(safe-area-inset-bottom));
+  }
 }
 
 #page--background {

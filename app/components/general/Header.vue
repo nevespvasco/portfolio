@@ -1,197 +1,190 @@
 <template>
-  <header class="container">
-    <div class="location">{{ locationLabel }}</div>
-    <div class="content--centered">
-      <ul v-if="routerLinks.length > 0" class="router-list">
-        <li v-for="router in routerLinks" :key="router.id">
+  <header class="site-header">
+    <NuxtLink to="/" class="brand">{{ site.name }}</NuxtLink>
+    <nav class="nav" aria-label="Main">
+      <ul class="nav-list">
+        <li v-for="item in navItems" :key="item.id">
           <NuxtLink
-            :to="router.routerName"
-            :class="[
-              'router-item',
-              'tooltip-box',
-              { 'active-route': router.routerName === route.fullPath },
-            ]"
+            :to="item.to"
+            :class="['nav-item', { 'nav-item--active': item.id === active }]"
+            :aria-current="item.id === active ? 'page' : undefined"
+            @click="scrollIfAlreadyHome(item.to)"
           >
-            <Icon :name="router.icon" class="router-icon" aria-hidden="true" />
-
-            <span class="router-title">{{ router.title }}</span>
-
-            <div class="tooltip">
-              <span class="text">{{ router.title }}</span>
-            </div>
+            <Icon :name="item.icon" class="nav-icon" aria-hidden="true" />
+            <span class="nav-label">{{ item.label }}</span>
           </NuxtLink>
         </li>
       </ul>
-    </div>
-    <div class="schedule-call">
+    </nav>
+    <div class="cta">
       <ButtonBooking />
     </div>
   </header>
 </template>
 
 <script lang="ts" setup>
-import { locationLabel } from "#shared/site";
+import { site } from "#shared/site";
+import type { NavItem } from "~/utils/navigation";
+
+const navItems: { id: NavItem; label: string; icon: string; to: string }[] = [
+  { id: "home", label: "Home", icon: "material-symbols:account-circle-full", to: "/" },
+  {
+    id: "projects",
+    label: "Projects",
+    icon: "material-symbols:book-2-outline-rounded",
+    to: "/#projects",
+  },
+];
 
 const route = useRoute();
+const projectsInView = ref(false);
+const active = computed(() => activeNavItem(route.path, projectsInView.value));
 
-const routerLinks = ref<
-  {
-    id: number;
-    title: string;
-    icon: string;
-    routerName: string;
-    isCurrentRoute: boolean;
-  }[]
->([
-  {
-    id: 1,
-    title: "Home",
-    icon: "material-symbols:account-circle-full",
-    routerName: "/",
-    isCurrentRoute: true,
-  },
-  {
-    id: 2,
-    title: "Projects",
-    icon: "material-symbols:book-2-outline-rounded",
-    routerName: "/#projects",
-    isCurrentRoute: false,
-  },
-]);
+// Track the home page's Projects section so the nav follows scrolling. The
+// observer is re-attached after every page change because the section only
+// exists on the home page.
+let observer: IntersectionObserver | undefined;
+
+function observeProjects() {
+  observer?.disconnect();
+  projectsInView.value = false;
+  const section = route.path === "/" ? document.getElementById("projects") : null;
+  if (!section) return;
+  observer = new IntersectionObserver(
+    ([entry]) => {
+      projectsInView.value = entry?.isIntersecting ?? false;
+    },
+    // "In view" means the section crosses the middle band of the viewport.
+    { rootMargin: "-45% 0px -45% 0px" },
+  );
+  observer.observe(section);
+}
+
+const nuxtApp = useNuxtApp();
+onMounted(observeProjects);
+const removeHook = nuxtApp.hook("page:transition:finish", observeProjects);
+onBeforeUnmount(() => {
+  observer?.disconnect();
+  removeHook();
+});
+
+// Clicking a nav item for a spot on the page you're already on is a no-op
+// navigation for the router, so scroll there explicitly.
+function scrollIfAlreadyHome(to: string) {
+  if (route.path !== "/") return;
+  const id = to.split("#")[1];
+  const target = id ? document.getElementById(id) : null;
+  if (target) target.scrollIntoView({ behavior: "smooth" });
+  else window.scrollTo({ top: 0, behavior: "smooth" });
+}
 </script>
 
 <style lang="scss" scoped>
-.container {
+.site-header {
   position: fixed;
-  width: 100%;
-  bottom: 1rem;
-  left: 0;
-  right: 0;
-  font-size: 0.875rem;
+  right: var(--gutter);
+  bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
+  left: var(--gutter);
+  z-index: 10;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  .location {
-    display: none;
-  }
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
 }
 
-.router-list {
-  display: flex;
-  color: var(--color-text);
-  list-style-type: none;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-bg);
-  padding: 0.25rem;
-  border-radius: 0.75rem;
-  gap: 0.25rem;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12), 0px 8px 12px rgba(0, 0, 0, 0.08),
-    0px 8px 16px rgba(0, 0, 0, 0.08);
-
-  .router-item {
-    color: inherit;
-    text-decoration: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 0.75rem;
-    border: 1px solid transparent;
-    transition: background-color 0.5s ease, border-color 0.5s ease;
-    &:hover {
-      background-color: var(--color-surface);
-      border: 1px solid var(--color-border);
-    }
-  }
-}
-
-.router-icon {
-  font-size: 1.4em;
-}
-
-.router-title {
+.brand {
   display: none;
 }
 
-.active-route {
-  background-color: var(--color-surface-raised);
+.nav-list {
+  display: flex;
+  gap: var(--space-1);
+  margin: 0;
+  padding: var(--space-1);
+  list-style: none;
   border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg);
+  box-shadow:
+    0 2px 4px rgb(0 0 0 / 12%),
+    0 8px 12px rgb(0 0 0 / 8%),
+    0 8px 16px rgb(0 0 0 / 8%);
 }
 
-.tooltip-box {
-  position: relative;
-  &:hover .tooltip,
-  &:active .tooltip {
-    opacity: 1;
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  min-width: 4rem;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  text-decoration: none;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--color-surface);
+    border-color: var(--color-border);
   }
-  .tooltip {
-    color: var(--color-text);
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 2px;
-    width: 120px;
-    bottom: 160%;
-    left: 50%;
-    margin-left: -60px;
-    opacity: 0;
-    transition: opacity 1s;
-    transition-timing-function: cubic-bezier(0.1, 0.5, 0.1);
-    position: absolute;
-    z-index: 1;
-    background-color: var(--color-tooltip);
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
 }
 
-.text::after {
-  content: " ";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: var(--color-tooltip) transparent transparent transparent;
+.nav-item--active {
+  background-color: var(--color-surface-raised);
+  border-color: var(--color-border);
 }
 
-@media (min-width: 768px) {
-  .container {
-    position: relative;
-    display: grid;
-    width: auto;
-    grid-template-columns: 25% 50% 25%;
-    align-items: center;
-    padding: 1rem;
-    .content--centered {
-      margin: 0 auto;
-    }
-
-    .location {
-      display: inline-block;
-      font-weight: 400;
-    }
-
-    .schedule-call {
-      display: flex;
-      justify-content: end;
-    }
-  }
-
-  .router-list {
-    background-color: var(--color-overlay);
-    width: fit-content;
-  }
-
-  .router-icon {
+.nav-icon {
   font-size: 1.4em;
 }
 
-.router-title {
-    display: inline-block;
+@media (min-width: 768px) {
+  .site-header {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    padding: var(--space-4);
   }
 
-  .tooltip {
-    display: none;
+  .brand {
+    display: inline;
+    justify-self: start;
+    color: var(--color-text);
+    font-weight: 500;
+    text-decoration: none;
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 4px;
+    }
+  }
+
+  .nav-list {
+    background-color: var(--color-overlay);
+    box-shadow: none;
+  }
+
+  .nav-item {
+    flex-direction: row;
+    gap: var(--space-2);
+    min-width: 0;
+    font-size: var(--text-sm);
+  }
+
+  .cta {
+    justify-self: end;
   }
 }
 </style>
