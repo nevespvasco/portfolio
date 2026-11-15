@@ -72,10 +72,13 @@ onBeforeUnmount(() => {
 // navigation for the router, so scroll there explicitly.
 function scrollIfAlreadyHome(to: string) {
   if (route.path !== "/") return;
+  const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? "auto"
+    : "smooth";
   const id = to.split("#")[1];
   const target = id ? document.getElementById(id) : null;
-  if (target) target.scrollIntoView({ behavior: "smooth" });
-  else window.scrollTo({ top: 0, behavior: "smooth" });
+  if (target) target.scrollIntoView({ behavior });
+  else window.scrollTo({ top: 0, behavior });
 }
 </script>
 

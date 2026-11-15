@@ -16,9 +16,10 @@ npm run preview   # serve the production build locally
 npm run lint      # ESLint (npm run lint:fix to autofix)
 npm run typecheck # vue-tsc via nuxt typecheck
 npm test          # Vitest unit tests (*.test.ts next to the code)
+npm run test:a11y # axe checks with Playwright against the production build (build first)
 ```
 
-CI runs lint, typecheck, tests and build on every pull request and push to `main`. Dependabot opens grouped weekly update PRs.
+CI runs lint, typecheck, unit tests, build and the accessibility checks on every pull request and push to `main`. Dependabot opens grouped weekly update PRs.
 
 ## Where the content lives
 

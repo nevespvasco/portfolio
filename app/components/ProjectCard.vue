@@ -19,7 +19,7 @@ const props = defineProps<{ project: Project }>();
 const href = computed(() => `/projects/${props.project.slug}`);
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .card {
   padding: 1.25rem;
   border: 1px solid var(--color-border);

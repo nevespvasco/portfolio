@@ -11,7 +11,7 @@
 import { site } from "#shared/site";
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .book-call {
   display: inline-flex;
   align-items: center;

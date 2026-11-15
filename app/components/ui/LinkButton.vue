@@ -9,7 +9,7 @@
 defineProps<{ to: string; icon?: string }>();
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .link-button {
   display: inline-flex;
   align-items: center;

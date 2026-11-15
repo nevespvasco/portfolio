@@ -30,7 +30,7 @@ const groupId = (name: string) =>
   `skills-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .skill-groups {
   display: grid;
   gap: var(--space-5);

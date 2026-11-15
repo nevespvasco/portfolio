@@ -92,6 +92,19 @@ a {
   text-underline-offset: 0.2em;
 }
 
+// Safety net for anything not handled per component: no motion at all when
+// the visitor asks for reduced motion.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

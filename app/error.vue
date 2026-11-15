@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <div id="page--background" />
+    <SkipLink />
+    <div id="page--background" aria-hidden="true" />
     <GeneralHeader />
     <UiPageContainer>
       <section class="error" aria-labelledby="error-title">
@@ -48,7 +49,7 @@ function leave(to: string) {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .error {
   padding: var(--space-8) 0;
 }
