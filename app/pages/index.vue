@@ -2,7 +2,7 @@
   <UiPageContainer>
     <section class="hero" aria-labelledby="hero-name">
       <NuxtPicture
-        src="/img/profile.jpg"
+        src="/img/vasco-neves.jpg"
         format="avif,webp"
         width="160"
         height="160"
