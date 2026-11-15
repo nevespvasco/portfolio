@@ -7,9 +7,9 @@
 //
 // Sources:
 //   - public sites, captured with Playwright;
-//   - local apps running with demo data (never production): set
-//     CIRNOTA_APP_URL / CIRNOTA_DEMO_EMAIL / CIRNOTA_DEMO_PASSWORD and
-//     FILEBRIDGE_APP_URL to include them;
+//   - filebridge running locally in its mock mode (demo data only): set
+//     FILEBRIDGE_APP_URL to include it. Cirnota's app is private, so only
+//     its public marketing pages are ever captured;
 //   - artwork copied from the project's own repository (ARTWORK_DIR);
 //   - a generated cover for projects without a UI (PushGuard).
 //
@@ -40,8 +40,13 @@ interface Shot {
 const settle = (ms: number): Capture => (page) => page.waitForTimeout(ms);
 
 const amr = "https://a-minha-rua.vercel.app";
-const cirnotaApp = process.env.CIRNOTA_APP_URL;
 const filebridgeApp = process.env.FILEBRIDGE_APP_URL;
+
+/** Scrolls a section of the Cirnota landing page to the top of the screen. */
+const cirnotaSection = (id: string): Capture => async (page) => {
+  await page.locator(`#${id}`).evaluate((el) => el.scrollIntoView({ block: "start" }));
+  await page.waitForTimeout(2500);
+};
 
 const shots: Shot[] = [
   { project: "a-minha-rua", name: "cover", source: { file: join(artwork, "public/hero.webp") } },
@@ -61,29 +66,22 @@ const shots: Shot[] = [
     name: "cover",
     source: { url: "https://cirnota.pt/", before: settle(2500) },
   },
+  {
+    project: "cirnota",
+    name: "gallery-1",
+    source: { url: "https://cirnota.pt/", before: cirnotaSection("cap-registo") },
+  },
+  {
+    project: "cirnota",
+    name: "gallery-2",
+    source: { url: "https://cirnota.pt/", before: cirnotaSection("cap-progresso") },
+  },
+  {
+    project: "cirnota",
+    name: "gallery-3",
+    source: { url: "https://cirnota.pt/", before: cirnotaSection("cap-curriculo") },
+  },
 ];
-
-if (cirnotaApp) {
-  const base = cirnotaApp.replace(/\/$/, "");
-  const login: Capture = async (page) => {
-    await page.goto(`${base}/login`);
-    await page.getByLabel(/e-?mail/i).fill(process.env.CIRNOTA_DEMO_EMAIL ?? "");
-    await page.getByLabel(/palavra-passe|password/i).fill(process.env.CIRNOTA_DEMO_PASSWORD ?? "");
-    await page.getByRole("button", { name: /entrar/i }).click();
-    await page.waitForLoadState("networkidle");
-  };
-  const after = (path: string, ms = 2500): Capture => async (page) => {
-    await login(page);
-    await page.goto(`${base}${path}`);
-    await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(ms);
-  };
-  shots.push(
-    { project: "cirnota", name: "gallery-1", source: { url: base, before: after("/cirurgias") } },
-    { project: "cirnota", name: "gallery-2", source: { url: base, before: after("/progresso") } },
-    { project: "cirnota", name: "gallery-3", source: { url: base, before: after("/curriculo") } },
-  );
-}
 
 if (filebridgeApp) {
   // filebridge uses hash routing and, in mock mode, serves demo data only.

@@ -60,6 +60,23 @@ export const projects: Project[] = [
       src: "/projects/cirnota/cover.webp",
       alt: "The Cirnota landing page: a headline about logging every surgery over an operating-theatre lamp.",
     },
+    gallery: [
+      {
+        src: "/projects/cirnota/gallery-1.webp",
+        alt: "A list of surgeries by date, procedure and role, with a highlighted prompt for a missing field.",
+        caption: "From the public landing page: logging a surgery, with a prompt when a field is missing. Sample data.",
+      },
+      {
+        src: "/projects/cirnota/gallery-2.webp",
+        alt: "A progress card showing 42 of 60 procedures done as principal surgeon, against a residency minimum.",
+        caption: "Progress against the residency minimums, as shown on the public landing page. Sample data.",
+      },
+      {
+        src: "/projects/cirnota/gallery-3.webp",
+        alt: "A CV preview with a table of procedures by role, ready to export as PDF or Word.",
+        caption: "The CV, ready to export as PDF or Word, as shown on the public landing page. Sample data.",
+      },
+    ],
     outcome:
       "A surgical portfolio for doctors in Portugal, in production: log surgeries on the day, see what is left for residency minimums, and export a CV as PDF or Word.",
     tags: ["React 19", "TypeScript", "Vite", "NestJS", "PostgreSQL"],
