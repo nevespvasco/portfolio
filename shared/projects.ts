@@ -115,7 +115,7 @@ export const projects: Project[] = [
   {
     slug: "a-minha-rua",
     name: "A Minha Rua",
-    live: "https://isometric-lisbon-sigma.vercel.app",
+    live: "https://a-minha-rua.vercel.app",
     year: 2026,
     role: "Solo developer",
     status: "production",
