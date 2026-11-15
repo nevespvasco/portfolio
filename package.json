@@ -13,7 +13,9 @@
     "typecheck": "nuxt typecheck",
     "test": "vitest run",
     "og:card": "node scripts/og-card.ts",
-    "test:a11y": "playwright test"
+    "test:a11y": "playwright test",
+    "screenshots": "node scripts/capture-screenshots.ts",
+    "pushguard:cover": "node scripts/pushguard-cover.ts"
   },
   "dependencies": {
     "@nuxt/fonts": "^1.2.0",
