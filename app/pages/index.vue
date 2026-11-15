@@ -12,7 +12,7 @@
       <div>
         <div class="location-container">
           <span class="location-info">
-            <IconsGlobe :fill-color="'#00dc82'" />
+            <Icon name="bi:globe-europe-africa" class="location-icon" aria-hidden="true" />
             Lisbon, Portugal
           </span>
         </div>
@@ -30,10 +30,7 @@
           <ul v-if="socialLinks.length > 0" class="social-list">
             <li v-for="social in socialLinks" :key="social.id">
               <a :href="social.link" class="social-item">
-                <component
-                  :is="social.iconName"
-                  :size="{ width: '1.2em', height: '1.2em' }"
-                />
+                <Icon :name="social.icon" class="social-icon" aria-hidden="true" />
                 <span class="social-title">{{ social.title }}</span>
               </a>
             </li>
@@ -92,10 +89,10 @@
               width: 42px;
             "
           >
-            <component
-              :is="technical.iconName"
-              :size="{ width: '2em', height: '2em' }"
+            <Icon
+              :name="technical.icon"
               class="technical-skills-icon"
+              aria-hidden="true"
               :class="[
                 technical.isOver ? 'technical-skills-icon--animation' : '',
               ]"
@@ -118,47 +115,32 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  IconsEmail,
-  IconsGithub,
-  IconsLinkedin,
-  IconsVue,
-  IconsNuxt,
-  IconsPinia,
-  IconsLaravel,
-  IconsReact,
-  IconsRedux,
-  IconsDocker,
-  IconsTypescript,
-  IconsTailwindcss,
-} from "#components";
-import { type Component, markRaw } from "vue";
 import { projects } from "~/data/projects";
 
 const socialLinks = ref<
   {
     id: number;
     title: string;
-    iconName: Component;
+    icon: string;
     link: string;
   }[]
 >([
   {
     id: 0,
     title: "GitHub",
-    iconName: markRaw(IconsGithub),
+    icon: "mdi:github",
     link: "https://github.com/nevespvasco",
   },
   {
     id: 1,
     title: "LinkedIn",
-    iconName: markRaw(IconsLinkedin),
+    icon: "mdi:linkedin",
     link: "https://www.linkedin.com/in/nevespvasco",
   },
   {
     id: 2,
     title: "Email",
-    iconName: markRaw(IconsEmail),
+    icon: "material-symbols:mail",
     link: "mailto:nevespvasco+jobs@gmail.com",
   },
 ]);
@@ -166,7 +148,7 @@ const socialLinks = ref<
 const technicalIcons = ref<
   {
     id: number;
-    iconName: Component;
+    icon: string;
     isOver: boolean;
     name: string;
     colorName: string;
@@ -174,63 +156,63 @@ const technicalIcons = ref<
 >([
   {
     id: 0,
-    iconName: markRaw(IconsVue),
+    icon: "logos:vue",
     isOver: false,
     name: "Vue",
     colorName: "#41B883",
   },
   {
     id: 1,
-    iconName: markRaw(IconsNuxt),
+    icon: "logos:nuxt-icon",
     isOver: false,
     name: "Nuxt",
     colorName: "#00DC82",
   },
   {
     id: 2,
-    iconName: markRaw(IconsPinia),
+    icon: "logos:pinia",
     isOver: false,
     name: "Pinia",
     colorName: "#ffd04a",
   },
   {
     id: 3,
-    iconName: markRaw(IconsLaravel),
+    icon: "logos:laravel",
     isOver: false,
     name: "Laravel",
     colorName: "#FF2D20",
   },
   {
     id: 4,
-    iconName: markRaw(IconsReact),
+    icon: "devicon:react",
     isOver: false,
     name: "React",
     colorName: "#61DAFB",
   },
   {
     id: 5,
-    iconName: markRaw(IconsRedux),
+    icon: "logos:redux",
     isOver: false,
     name: "Redux",
     colorName: "#764ABC",
   },
   {
     id: 6,
-    iconName: markRaw(IconsDocker),
+    icon: "logos:docker-icon",
     isOver: false,
     name: "Docker",
     colorName: "#2396ED",
   },
   {
     id: 7,
-    iconName: markRaw(IconsTypescript),
+    icon: "logos:typescript-icon",
     isOver: false,
     name: "TypeScript",
     colorName: "#3178C6",
   },
   {
     id: 8,
-    iconName: markRaw(IconsTailwindcss),
+    icon: "logos:tailwindcss-icon",
     isOver: false,
     name: "Tailwind CSS",
     colorName: "#44a8b3",
@@ -265,6 +247,10 @@ const technicalIcons = ref<
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+}
+
+.location-icon {
+  color: var(--green);
 }
 
 .location-info {
@@ -336,6 +322,10 @@ const technicalIcons = ref<
   color: var(--white);
 }
 
+.technical-skills-icon {
+  font-size: 2em;
+}
+
 .technical-skills-icons {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
@@ -365,6 +355,10 @@ const technicalIcons = ref<
   font-weight: 500;
   margin-bottom: 0;
   flex-wrap: wrap;
+}
+
+.social-icon {
+  font-size: 1.2em;
 }
 
 .social-item {

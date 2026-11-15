@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@nuxt/fonts": "^1.2.0",
+    "@nuxt/icon": "^2.6.2",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.1.0",
     "nuxt": "^4.6.4",
@@ -21,6 +22,11 @@
     "vue-router": "^5.5.1"
   },
   "devDependencies": {
+    "@iconify-json/bi": "^1.2.7",
+    "@iconify-json/devicon": "^1.2.81",
+    "@iconify-json/logos": "^1.2.20",
+    "@iconify-json/material-symbols": "^1.2.100",
+    "@iconify-json/mdi": "^1.2.3",
     "@nuxt/eslint": "^1.17.0",
     "eslint": "^10.15.0",
     "sass-embedded": "^1.108.2",

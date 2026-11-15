@@ -12,10 +12,7 @@
               { 'active-route': router.routerName === route.fullPath },
             ]"
           >
-            <component
-              :is="router.iconName"
-              :size="{ width: '1.4em', height: '1.4em' }"
-            />
+            <Icon :name="router.icon" class="router-icon" aria-hidden="true" />
 
             <span class="router-title">{{ router.title }}</span>
 
@@ -33,16 +30,13 @@
 </template>
 
 <script lang="ts" setup>
-import { IconsAccount, IconsBook } from "#components";
-import { type Component, markRaw } from "vue";
-
 const route = useRoute();
 
 const routerLinks = ref<
   {
     id: number;
     title: string;
-    iconName: Component;
+    icon: string;
     routerName: string;
     isCurrentRoute: boolean;
   }[]
@@ -50,14 +44,14 @@ const routerLinks = ref<
   {
     id: 1,
     title: "Home",
-    iconName: markRaw(IconsAccount),
+    icon: "material-symbols:account-circle-full",
     routerName: "/",
     isCurrentRoute: true,
   },
   {
     id: 2,
     title: "Projects",
-    iconName: markRaw(IconsBook),
+    icon: "material-symbols:book-2-outline-rounded",
     routerName: "/#projects",
     isCurrentRoute: false,
   },
@@ -108,6 +102,10 @@ const routerLinks = ref<
       border: 1px solid var(--scheme-gray-600-30);
     }
   }
+}
+
+.router-icon {
+  font-size: 1.4em;
 }
 
 .router-title {
@@ -182,7 +180,11 @@ const routerLinks = ref<
     width: fit-content;
   }
 
-  .router-title {
+  .router-icon {
+  font-size: 1.4em;
+}
+
+.router-title {
     display: inline-block;
   }
 

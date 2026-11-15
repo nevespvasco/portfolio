@@ -5,13 +5,13 @@
     </span>
     <div class="footer-icons">
       <a href="https://github.com/nevespvasco" aria-label="GitHub">
-        <IconsGithub :size="{ width: '1.5em', height: '1.5em' }" />
+        <Icon name="mdi:github" aria-hidden="true" />
       </a>
       <a href="https://www.linkedin.com/in/nevespvasco" aria-label="LinkedIn">
-        <IconsLinkedin :size="{ width: '1.5em', height: '1.5em' }" />
+        <Icon name="mdi:linkedin" aria-hidden="true" />
       </a>
       <a href="mailto:nevespvasco+jobs@gmail.com" aria-label="Email">
-        <IconsEmail :size="{ width: '1.5em', height: '1.5em' }" />
+        <Icon name="material-symbols:mail" aria-hidden="true" />
       </a>
     </div>
   </footer>
@@ -37,6 +37,8 @@ footer {
   gap: 1.25rem;
   a {
     color: inherit;
+    font-size: 1.5em;
+    line-height: 0;
   }
 }
 
