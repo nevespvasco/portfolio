@@ -21,7 +21,7 @@ for (const { name, path, notFound } of pages) {
     page.on("console", (message) => {
       if (message.type() !== "error") return;
       // The 404 page's own response is logged as a failed resource load.
-      if (notFound && message.text().includes("404")) return;
+      if (notFound && /^Failed to load resource: .*\b404\b/.test(message.text())) return;
       errors.push(message.text());
     });
 

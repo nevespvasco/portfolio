@@ -152,7 +152,8 @@ test.describe("main navigation", () => {
     }).toBeLessThan(1);
   });
 
-  test("hovering an item grows its underline", async ({ page }) => {
+  test("hovering an item grows its underline", async ({ page }, testInfo) => {
+    test.skip(Boolean(testInfo.project.use.hasTouch), "Touch screens have no hover, so it's off there");
     await page.goto("/");
     const projects = nav(page).getByRole("link", { name: "Projects" });
     const underline = () => projects.evaluate((el) => getComputedStyle(el, "::after").transform);
@@ -195,8 +196,24 @@ test.describe("main navigation", () => {
       await page.getByRole("button", { name: "Menu" }).click();
       await expect(page.locator("#site-menu")).toHaveCSS("opacity", "1");
       await page.keyboard.press("Escape");
-      await expect(page.locator("#site-menu")).toHaveCSS("transition-property", /opacity/);
+      // Mid-fade: an opacity transition is running on the panel.
+      const fading = await page.locator("#site-menu").evaluate((menu) =>
+        menu.getAnimations().some((a) => (a as CSSTransition).transitionProperty === "opacity"),
+      );
+      expect(fading).toBe(true);
       await expect(page.locator("#site-menu")).toBeHidden();
     });
   });
+});
+
+test("the header's Book a call keeps its size in the top bar", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/");
+  const bar = (await page.locator(".site-header").boundingBox())!;
+  const button = (await page.locator(".site-header .book-call").boundingBox())!;
+  // 0.6rem padding top and bottom around one 1.6 line-height line at the
+  // header's 0.875rem: the size it had before the bubbles came back.
+  expect(button.height).toBeCloseTo(41.6, 0);
+  expect(button.y).toBeGreaterThanOrEqual(bar.y);
+  expect(button.y + button.height).toBeLessThanOrEqual(bar.y + bar.height);
 });

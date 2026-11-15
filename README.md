@@ -27,6 +27,8 @@ The Playwright checks run in five projects: Desktop Chrome, Android Chrome (Pixe
 
 WebKit in CI is close to Safari but not the same thing, so after visual changes still check by hand on a real iPhone (and once in Brave with Shields on).
 
+Already checked and nothing to do: the site doesn't set `viewport-fit=cover`, so iOS safe-area insets are zero; `display: contents` in the header is only on a plain wrapper `div`, never on the `nav` or list (Safari used to drop their semantics); fonts and icons are self-hosted, so content blockers such as Brave Shields don't touch them.
+
 ## Where the content lives
 
 - `shared/site.ts`: name, role, location, languages, email, socials, booking and site URL, bio copy (edit once, used everywhere)

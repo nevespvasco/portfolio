@@ -19,7 +19,17 @@
       </defs>
     </svg>
     <span class="goo" :style="{ filter: `url(#${filterId})` }" aria-hidden="true">
-      <span v-for="n in bubbleCount" :key="n" class="bubble" />
+      <span
+        v-for="(bubble, i) in bubbles"
+        :key="i"
+        class="bubble"
+        :style="{
+          '--left': `${bubble.left}%`,
+          '--size': `${bubble.size}px`,
+          '--duration': `${bubble.duration}s`,
+          '--delay': `${-bubble.delay}s`,
+        }"
+      />
     </span>
 
     <Icon name="material-symbols:calendar-month-outline" aria-hidden="true" />
@@ -33,13 +43,24 @@
 import { site } from "#shared/site";
 
 const filterId = `goo-${useId()}`;
-const bubbleCount = 8;
+
+// Bubbles start just inside the top edge, rise a few pixels and shrink away,
+// so they stay in the space above the button. Positions (% of the width),
+// sizes (px) and timings (s) are fixed, not random, so every build looks the
+// same.
+const bubbles = [
+  { left: 6, size: 20, duration: 2.6, delay: 0 },
+  { left: 18, size: 16, duration: 3.1, delay: 1.2 },
+  { left: 30, size: 22, duration: 2.8, delay: 0.5 },
+  { left: 43, size: 17, duration: 3.4, delay: 2 },
+  { left: 54, size: 21, duration: 2.7, delay: 0.9 },
+  { left: 65, size: 16, duration: 3.2, delay: 1.6 },
+  { left: 74, size: 20, duration: 2.9, delay: 0.3 },
+  { left: 82, size: 15, duration: 3, delay: 2.4 },
+];
 </script>
 
 <style lang="scss" scoped>
-@use "sass:list";
-@use "sass:map";
-
 .book-call {
   position: relative;
   // Keeps the green layer (z-index -1) behind the label but inside the link.
@@ -87,38 +108,15 @@ const bubbleCount = 8;
   pointer-events: none;
 }
 
-// Bubbles start just inside the top edge, rise a few pixels and shrink away,
-// so they never reach past the space above the button. Positions and timings
-// are fixed (not random) so every build looks the same.
-$bubbles: (
-  (left: 6%, size: 20px, duration: 2.6s, delay: 0s),
-  (left: 18%, size: 16px, duration: 3.1s, delay: 1.2s),
-  (left: 30%, size: 22px, duration: 2.8s, delay: 0.5s),
-  (left: 43%, size: 17px, duration: 3.4s, delay: 2s),
-  (left: 54%, size: 21px, duration: 2.7s, delay: 0.9s),
-  (left: 65%, size: 16px, duration: 3.2s, delay: 1.6s),
-  (left: 74%, size: 20px, duration: 2.9s, delay: 0.3s),
-  (left: 82%, size: 15px, duration: 3s, delay: 2.4s),
-);
-
 .bubble {
   position: absolute;
   top: 4px;
+  left: var(--left);
+  width: var(--size);
+  height: var(--size);
   border-radius: 50%;
   background-color: var(--color-accent);
-  animation: rise linear infinite;
-
-  @each $b in $bubbles {
-    $i: list.index($bubbles, $b);
-
-    &:nth-child(#{$i}) {
-      left: map.get($b, left);
-      width: map.get($b, size);
-      height: map.get($b, size);
-      animation-duration: map.get($b, duration);
-      animation-delay: -(map.get($b, delay));
-    }
-  }
+  animation: rise var(--duration) linear var(--delay) infinite;
 }
 
 @keyframes rise {
