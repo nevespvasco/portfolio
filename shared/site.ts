@@ -17,7 +17,7 @@ export const site = {
     "Vasco Neves, Senior Frontend Engineer in Lisbon. Data-heavy Vue 3, Nuxt and TypeScript apps, tested with Vitest and Playwright.",
   url: "https://www.vasconeves.com",
   location: { city: "Lisbon", country: "Portugal", countryCode: "PT" },
-  languages: ["Portuguese (native)", "English (professional working)"],
+  languages: ["Portuguese", "English"],
   /** First year working in frontend; the bio counts years from it. */
   careerStartYear: 2020,
   email,
