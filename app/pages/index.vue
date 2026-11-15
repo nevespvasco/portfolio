@@ -57,6 +57,8 @@
       <UiSectionHeading id="skills-heading">Technical Skills</UiSectionHeading>
       <SkillGroups :groups="skillGroups" />
     </section>
+
+    <ContactCta />
   </UiPageContainer>
 </template>
 

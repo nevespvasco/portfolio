@@ -19,17 +19,14 @@
         </ul>
       </section>
 
-      <p class="contact">
-        Want the 10-minute walkthrough?
-        <a :href="emailLink.url">Email me</a>.
-      </p>
+      <ContactCta>Want the 10-minute walkthrough?</ContactCta>
     </article>
   </UiPageContainer>
 </template>
 
 <script lang="ts" setup>
 import { projects } from "~/data/projects";
-import { absoluteUrl, emailLink, site } from "#shared/site";
+import { absoluteUrl, site } from "#shared/site";
 
 const route = useRoute();
 const project = projects.find((p) => p.slug === route.params.slug);
@@ -74,9 +71,5 @@ useHead({
 
 .bullets li {
   margin-bottom: var(--space-2);
-}
-
-.contact {
-  margin: var(--space-7) 0 var(--space-8);
 }
 </style>

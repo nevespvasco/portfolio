@@ -17,7 +17,7 @@
       </ul>
     </nav>
     <div class="cta">
-      <ButtonBooking />
+      <BookCallButton />
     </div>
   </header>
 </template>
