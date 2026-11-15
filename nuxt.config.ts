@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   css: ["~/assets/main.scss"],
   compatibilityDate: "2026-11-01",
   devtools: { enabled: true },
-  modules: ["@nuxt/fonts", "@vercel/analytics/nuxt", "@vercel/speed-insights/nuxt"],
+  modules: ["@nuxt/eslint", "@nuxt/fonts", "@vercel/analytics/nuxt", "@vercel/speed-insights/nuxt"],
   fonts: {
     families: [
       // only resolve this font with the `google` provider

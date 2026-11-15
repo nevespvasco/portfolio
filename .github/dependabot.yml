@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      nuxt:
+        patterns: ["nuxt", "@nuxt/*", "vue", "vue-router", "vue-tsc"]
+      vercel:
+        patterns: ["@vercel/*"]
+      tooling:
+        patterns: ["eslint", "typescript", "sass-embedded"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]

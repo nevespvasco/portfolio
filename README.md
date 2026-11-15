@@ -13,7 +13,11 @@ npm install       # install dependencies
 npm run dev       # dev server on http://localhost:3000
 npm run build     # production build
 npm run preview   # serve the production build locally
+npm run lint      # ESLint (npm run lint:fix to autofix)
+npm run typecheck # vue-tsc via nuxt typecheck
 ```
+
+CI runs lint, typecheck and build on every pull request and push to `main`. Dependabot opens grouped weekly update PRs.
 
 ## Where the content lives
 

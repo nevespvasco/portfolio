@@ -113,7 +113,7 @@ export interface Size {
 defineProps({
   size: {
     type: Object as PropType<Size>,
-    default: { width: "0.78em", height: "1em" },
+    default: () => ({ width: "0.78em", height: "1em" }),
   },
 });
 </script>

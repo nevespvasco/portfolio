@@ -22,16 +22,16 @@
     <a id="gooey-button" href="https://book.schedly.io/nevespvasco">
       Book Now
       <span class="bubbles">
-        <span class="bubble"></span>
-        <span class="bubble"></span>
-        <span class="bubble"></span>
-        <span class="bubble"></span>
-        <span class="bubble"></span>
-        <span class="bubble"></span>
-        <span class="bubble"></span>
-        <span class="bubble"></span>
-        <span class="bubble"></span>
-        <span class="bubble"></span>
+        <span class="bubble" />
+        <span class="bubble" />
+        <span class="bubble" />
+        <span class="bubble" />
+        <span class="bubble" />
+        <span class="bubble" />
+        <span class="bubble" />
+        <span class="bubble" />
+        <span class="bubble" />
+        <span class="bubble" />
       </span>
     </a>
   </div>

@@ -27,7 +27,7 @@
       </ul>
     </div>
     <div class="schedule-call">
-      <ButtonBooking></ButtonBooking>
+      <ButtonBooking />
     </div>
   </header>
 </template>

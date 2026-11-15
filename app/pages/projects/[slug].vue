@@ -1,6 +1,6 @@
 <template>
   <main class="main-container">
-    <section></section>
+    <section />
     <article v-if="project">
       <p class="back"><NuxtLink to="/#projects">← All projects</NuxtLink></p>
       <h1 class="project-name">{{ project.name }}</h1>
@@ -27,7 +27,7 @@
         <a href="mailto:nevespvasco+jobs@gmail.com">Email me</a>.
       </p>
     </article>
-    <section></section>
+    <section />
   </main>
 </template>
 

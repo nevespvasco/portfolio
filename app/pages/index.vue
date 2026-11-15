@@ -1,18 +1,18 @@
 <template>
   <main class="main-container">
-    <section></section>
+    <section />
     <section>
       <div class="profile-pic-container">
         <img
           src="@/assets/img/profile_pic.jpg"
           class="profile-pic"
           alt="profile photo of me"
-        />
+        >
       </div>
       <div>
         <div class="location-container">
           <span class="location-info">
-            <IconsGlobe :fillColor="'#00dc82'"></IconsGlobe>
+            <IconsGlobe :fill-color="'#00dc82'" />
             Lisbon, Portugal
           </span>
         </div>
@@ -80,7 +80,7 @@
 
       <div class="technical-skills-container">
         <h2 class="technical-skills-title">Technical Skills</h2>
-        <div class="technical-skills-icons" v-if="technicalIcons.length > 0">
+        <div v-if="technicalIcons.length > 0" class="technical-skills-icons">
           <div
             v-for="technical in technicalIcons"
             :key="technical.id"
@@ -113,7 +113,7 @@
         Figma, Claude API.
       </p>
     </section>
-    <section></section>
+    <section />
   </main>
 </template>
 

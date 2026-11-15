@@ -5,13 +5,13 @@
     </span>
     <div class="footer-icons">
       <a href="https://github.com/nevespvasco" aria-label="GitHub">
-        <IconsGithub :size="{ width: '1.5em', height: '1.5em' }"></IconsGithub>
+        <IconsGithub :size="{ width: '1.5em', height: '1.5em' }" />
       </a>
       <a href="https://www.linkedin.com/in/nevespvasco" aria-label="LinkedIn">
-        <IconsLinkedin :size="{ width: '1.5em', height: '1.5em' }"></IconsLinkedin>
+        <IconsLinkedin :size="{ width: '1.5em', height: '1.5em' }" />
       </a>
       <a href="mailto:nevespvasco+jobs@gmail.com" aria-label="Email">
-        <IconsEmail :size="{ width: '1.5em', height: '1.5em' }"></IconsEmail>
+        <IconsEmail :size="{ width: '1.5em', height: '1.5em' }" />
       </a>
     </div>
   </footer>
