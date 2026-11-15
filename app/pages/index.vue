@@ -34,12 +34,15 @@
     <p class="lead">{{ bio }}</p>
 
     <section id="projects" aria-labelledby="projects-heading">
-      <UiSectionHeading id="projects-heading">Projects</UiSectionHeading>
+      <UiSectionHeading id="projects-heading">Selected projects</UiSectionHeading>
       <ul class="project-list">
-        <li v-for="project in projects" :key="project.slug">
-          <ProjectCard :project="project" />
+        <li v-for="project in featuredProjects" :key="project.slug">
+          <ProjectCard :project="project" compact />
         </li>
       </ul>
+      <p class="all-projects">
+        <UiLinkButton :to="projectsListPath">View all projects →</UiLinkButton>
+      </p>
     </section>
 
     <section aria-labelledby="how-heading">
@@ -57,11 +60,12 @@
 </template>
 
 <script lang="ts" setup>
-import { projects } from "#shared/projects";
+import { projects, projectsListPath } from "#shared/projects";
 import { skillGroups } from "~/data/skills";
 import { contactLinks, copy, locationLabel, site } from "#shared/site";
 
 const bio = copy.bio();
+const featuredProjects = projects.filter((project) => project.featured);
 </script>
 
 <style lang="scss" scoped>
@@ -135,6 +139,10 @@ const bio = copy.bio();
 .lead {
   font-size: var(--text-lg);
   font-weight: 400;
+}
+
+.all-projects {
+  margin: var(--space-4) 0 0;
 }
 
 .project-list {
