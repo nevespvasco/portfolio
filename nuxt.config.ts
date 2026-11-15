@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   css: ["~/assets/main.scss"],
   compatibilityDate: "2026-11-01",
   devtools: { enabled: true },
-  modules: ["@nuxt/eslint", "@nuxt/fonts", "@nuxt/icon", "@vercel/analytics/nuxt", "@vercel/speed-insights/nuxt"],
+  modules: ["@nuxt/eslint", "@nuxt/fonts", "@nuxt/icon", "@nuxt/image", "@vercel/analytics/nuxt", "@vercel/speed-insights/nuxt"],
   fonts: {
     families: [
       // only resolve this font with the `google` provider
@@ -19,6 +19,20 @@ export default defineNuxtConfig({
       scan: { globInclude: ["app/**/*.{vue,ts}"] },
     },
     fallbackToApi: false,
+  },
+  image: {
+    format: ["avif", "webp"],
+    // On Vercel only these widths are allowed, so the 160px profile photo
+    // (and its 2x, 320) must be listed next to the default breakpoints.
+    screens: {
+      avatar: 160,
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
+    },
   },
   nitro: {
     // The sitemap is generated from the projects list at build time.

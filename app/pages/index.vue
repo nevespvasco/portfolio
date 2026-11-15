@@ -1,11 +1,16 @@
 <template>
   <UiPageContainer>
     <section class="hero" aria-labelledby="hero-name">
-      <img
-        src="@/assets/img/profile_pic.jpg"
-        class="profile-pic"
-        :alt="site.name"
-      >
+      <NuxtPicture
+        src="/img/profile.jpg"
+        format="avif,webp"
+        width="160"
+        height="160"
+        sizes="160px"
+        densities="x1 x2"
+        preload
+        :img-attrs="{ class: 'profile-pic', alt: site.name, fetchpriority: 'high' }"
+      />
       <p class="location">
         <Icon name="bi:globe-europe-africa" class="location-icon" aria-hidden="true" />
         {{ locationLabel }}
@@ -76,7 +81,9 @@ import { contactLinks, locationLabel, site } from "#shared/site";
   padding-top: var(--space-5);
 }
 
-.profile-pic {
+// The <img> is rendered inside NuxtPicture, out of reach of scoped styles.
+:deep(.profile-pic) {
+  display: block;
   width: 10rem;
   height: 10rem;
   border: 1px solid var(--color-border-strong);
