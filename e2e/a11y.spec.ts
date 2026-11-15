@@ -33,3 +33,38 @@ test("the skip link is the first thing Tab reaches and jumps to the content", as
   await page.keyboard.press("Enter");
   await expect(page.locator("main#main")).toBeFocused();
 });
+
+test.describe("mobile menu", () => {
+  test.use({ viewport: { width: 375, height: 812 } });
+
+  test("opens with the button, closes with Escape and gives focus back", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    const button = page.getByRole("button", { name: "Menu" });
+    const menu = page.locator("#site-menu");
+
+    await expect(menu).toBeHidden();
+    await button.click();
+    await expect(button).toHaveAttribute("aria-expanded", "true");
+    await expect(menu.getByRole("link", { name: "Experience" })).toBeVisible();
+
+    const { violations } = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"])
+      .analyze();
+    expect(violations.filter((v) => v.impact === "serious" || v.impact === "critical")).toEqual([]);
+
+    await page.keyboard.press("Escape");
+    await expect(menu).toBeHidden();
+    await expect(button).toHaveAttribute("aria-expanded", "false");
+    await expect(button).toBeFocused();
+  });
+
+  test("closes when a link is followed", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    await page.getByRole("button", { name: "Menu" }).click();
+    await page.locator("#site-menu").getByRole("link", { name: "Projects" }).click();
+    await expect(page).toHaveURL(/\/projects$/);
+    await expect(page.locator("#site-menu")).toBeHidden();
+  });
+});

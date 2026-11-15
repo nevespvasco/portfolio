@@ -7,7 +7,7 @@
     </p>
     <ul class="project-list">
       <li v-for="(project, index) in projects" :key="project.slug">
-        <ProjectCard :project="project" :priority="index === 0" />
+        <ProjectCard :project="project" heading-level="h2" :priority="index === 0" />
       </li>
     </ul>
     <ContactCta />
