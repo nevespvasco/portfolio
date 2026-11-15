@@ -327,13 +327,14 @@ onBeforeUnmount(() => {
     padding: var(--space-2) var(--space-4);
     font-size: var(--text-sm);
 
-    // Hover: a faint underline grows from the middle of the item.
+    // Hover: a faint bar grows from the middle of the item, in the same place
+    // as the active marker (on the header's bottom border, full item width).
     &::after {
       position: absolute;
-      right: var(--space-4);
-      bottom: 0.3rem;
-      left: var(--space-4);
-      height: 1px;
+      right: 0;
+      bottom: calc(-1 * var(--space-3) - 1px);
+      left: 0;
+      height: 2px;
       background-color: var(--color-border-strong);
       content: "";
       transform: scaleX(0);
