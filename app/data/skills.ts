@@ -24,6 +24,7 @@ export const skillGroups: SkillGroup[] = [
       { name: "React", icon: "devicon:react" },
       { name: "Redux", icon: "logos:redux" },
       { name: "Tailwind CSS", icon: "logos:tailwindcss-icon" },
+      { name: "three.js", icon: "logos:threejs", silhouette: true },
     ],
   },
   {
@@ -40,6 +41,7 @@ export const skillGroups: SkillGroup[] = [
       { name: "NestJS", icon: "logos:nestjs" },
       { name: "PostgreSQL", icon: "logos:postgresql" },
       { name: "MySQL", icon: "logos:mysql-icon", silhouette: true },
+      { name: "Stripe", icon: "logos:stripe" },
     ],
   },
   {
@@ -49,6 +51,8 @@ export const skillGroups: SkillGroup[] = [
       { name: "Cursor", icon: "logos:cursor-icon", silhouette: true },
       { name: "Claude API", icon: "logos:claude-icon" },
       { name: "Docker", icon: "logos:docker-icon" },
+      { name: "CI/CD", icon: "logos:github-actions" },
+      { name: "Linux", icon: "logos:linux-tux", silhouette: true },
       { name: "Figma", icon: "logos:figma" },
     ],
   },

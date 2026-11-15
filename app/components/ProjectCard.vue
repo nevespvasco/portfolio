@@ -5,12 +5,9 @@
     </h3>
     <p class="card-outcome">{{ project.outcome }}</p>
     <UiTagList :tags="project.tags" />
-    <p class="card-links">
-      <NuxtLink :to="href">Case study</NuxtLink>
-      <a v-if="project.repo" :href="project.repo">
-        Repository<Icon name="material-symbols:arrow-outward" aria-hidden="true" /><span class="visually-hidden">(GitHub)</span>
-      </a>
-    </p>
+    <ProjectLinks :project="project" class="card-links">
+      <li><NuxtLink :to="href">Case study</NuxtLink></li>
+    </ProjectLinks>
   </article>
 </template>
 
@@ -48,8 +45,6 @@ const href = computed(() => projectPath(props.project.slug));
 }
 
 .card-links {
-  display: flex;
-  gap: var(--space-4);
-  margin: var(--space-3) 0 0;
+  margin-top: var(--space-3);
 }
 </style>

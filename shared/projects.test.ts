@@ -6,6 +6,9 @@ const project = (slug: string): Project => ({
   name: slug.toUpperCase(),
   outcome: "",
   tags: [],
+  year: 2026,
+  role: "Solo developer",
+  status: "open-source",
   sections: [],
 });
 
