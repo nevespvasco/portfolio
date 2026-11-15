@@ -1,7 +1,7 @@
 <template>
   <UiPageContainer>
     <h1 class="title">Experience</h1>
-    <p class="intro">Where I have worked, most recent first.</p>
+    <p class="intro">Where I have worked.</p>
 
     <ol class="timeline">
       <li v-for="role in roles" :key="`${role.company}-${role.start}`">

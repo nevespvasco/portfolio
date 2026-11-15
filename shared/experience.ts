@@ -1,5 +1,6 @@
 // Work history and education, transcribed from the LinkedIn profile (the
-// new export). Only what is already public there goes on the site.
+// new export). Only what is already public there goes on the site: each
+// role's stack lists only tools its own text names.
 
 export interface Role {
   company: string;
@@ -44,6 +45,7 @@ export const roles: Role[] = [
       "Automated workflows in an internal real estate ticketing system, eliminating 6+ months of cumulative manual effort across the operations team, highest single-impact delivery of the tenure.",
       "Designed a reusable Vue 3 component library adopted across the 13 person team, eliminating duplication across 30+ components and reducing integration overhead on every subsequent feature.",
     ],
+    stack: ["Vue 3", "SAP UI5"],
   },
   {
     company: "NOS SGPS",
@@ -56,6 +58,7 @@ export const roles: Role[] = [
       "Improved UX consistency by refining design guidelines and implementing reusable UI patterns",
       "Actively contributed to Agile delivery processes",
     ],
+    stack: ["JavaScript", "HTML", "SCSS"],
   },
   {
     company: "Wonderstaff",
@@ -68,6 +71,7 @@ export const roles: Role[] = [
       "Created a consistent user interface only for desktop devices.",
       "Optimized application for speed and scalability",
     ],
+    stack: ["React"],
   },
   {
     company: "Sinmetro",
@@ -81,6 +85,7 @@ export const roles: Role[] = [
       "Implemented Docker based deployment pipelines, reducing downtime and deployment friction",
       "Developed a React Native mobile application to support field operations in low-bandwidth environments",
     ],
+    stack: ["Vue.js", "Laravel", "Docker", "React Native"],
   },
   {
     company: "NBCLINIC",
@@ -92,6 +97,7 @@ export const roles: Role[] = [
       "Redesigned the clinic's website from scratch, creating wireframes in Adobe XD and implementing the frontend with Bulma, aligning with brand standards and improving UX.",
       "Introduced GitHub for version control and Trello for task tracking, establishing a structured workflow for the project.",
     ],
+    stack: ["Adobe XD", "Bulma", "GitHub", "Trello"],
   },
   {
     company: "Mediaweb Global",
@@ -105,6 +111,7 @@ export const roles: Role[] = [
       "Created mockup proposals and newsletters for client campaigns.",
       "Developed a seasonal web application for Lusiaves Company from concept to delivery.",
     ],
+    stack: ["OutSystems"],
   },
   {
     company: "Pombalsys",
@@ -116,6 +123,7 @@ export const roles: Role[] = [
       "Redesigned the company's outdated website end-to-end, wireframed in Adobe XD and developed the full implementation in Ruby on Rails.",
       "Produced print advertising materials for Luís Pinto & Gomes Lda using Photoshop CS6.",
     ],
+    stack: ["Adobe XD", "Ruby on Rails", "Photoshop"],
   },
 ];
 
