@@ -1,6 +1,6 @@
 <template>
   <header class="container">
-    <div class="location">Portugal/Lisbon</div>
+    <div class="location">{{ locationLabel }}</div>
     <div class="content--centered">
       <ul v-if="routerLinks.length > 0" class="router-list">
         <li v-for="router in routerLinks" :key="router.id">
@@ -30,6 +30,8 @@
 </template>
 
 <script lang="ts" setup>
+import { locationLabel } from "#shared/site";
+
 const route = useRoute();
 
 const routerLinks = ref<

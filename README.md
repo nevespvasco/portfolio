@@ -23,5 +23,6 @@ CI runs lint, typecheck and build on every pull request and push to `main`. Depe
 
 - `app/data/projects.ts`: project cards and case studies (`/projects/<slug>`)
 - `app/pages/index.vue`: home page (bio, skills)
+- `shared/site.ts`: name, role, location, languages, email, socials, booking and site URL (edit once, used everywhere)
 - `app/components/general/`: header and footer
 - `public/`: favicon, Open Graph image, `robots.txt`, `sitemap.xml`

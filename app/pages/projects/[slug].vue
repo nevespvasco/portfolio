@@ -24,7 +24,7 @@
 
       <p class="contact">
         Want the 10-minute walkthrough?
-        <a href="mailto:nevespvasco+jobs@gmail.com">Email me</a>.
+        <a :href="emailLink.url">Email me</a>.
       </p>
     </article>
     <section />
@@ -33,6 +33,7 @@
 
 <script lang="ts" setup>
 import { projects } from "~/data/projects";
+import { absoluteUrl, emailLink, site } from "#shared/site";
 
 const route = useRoute();
 const project = projects.find((p) => p.slug === route.params.slug);
@@ -42,14 +43,14 @@ if (!project) {
 }
 
 useHead({
-  title: `${project.name} · Vasco Neves`,
+  title: `${project.name} · ${site.name}`,
   meta: [
     { name: "description", content: project.outcome },
-    { property: "og:title", content: `${project.name} · Vasco Neves` },
+    { property: "og:title", content: `${project.name} · ${site.name}` },
     { property: "og:description", content: project.outcome },
   ],
   link: [
-    { rel: "canonical", href: `https://www.vasconeves.com/projects/${project.slug}` },
+    { rel: "canonical", href: absoluteUrl(`/projects/${project.slug}`) },
   ],
 });
 </script>

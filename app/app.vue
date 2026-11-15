@@ -10,41 +10,41 @@
 </template>
 
 <script setup lang="ts">
-const description =
-  "Vasco Neves, Senior Frontend Engineer in Lisbon. Data-heavy Vue 3, Nuxt and TypeScript apps, tested with Vitest and Playwright.";
+import { absoluteUrl, site } from "#shared/site";
+
+const title = `${site.name} · ${site.role}`;
+const ogImage = absoluteUrl("/og.jpg");
 
 useHead({
-  title: "Vasco Neves · Senior Frontend Engineer",
+  title,
   meta: [
-    { name: "description", content: description },
+    { name: "description", content: site.description },
     { property: "og:type", content: "website" },
-    { property: "og:title", content: "Vasco Neves · Senior Frontend Engineer" },
-    { property: "og:description", content: description },
-    { property: "og:url", content: "https://www.vasconeves.com/" },
-    { property: "og:image", content: "https://www.vasconeves.com/og.jpg" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: site.description },
+    { property: "og:url", content: absoluteUrl("/") },
+    { property: "og:image", content: ogImage },
     { name: "twitter:card", content: "summary" },
   ],
-  link: [{ rel: "canonical", href: "https://www.vasconeves.com/" }],
+  link: [{ rel: "canonical", href: absoluteUrl("/") }],
   script: [
     {
       type: "application/ld+json",
       innerHTML: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Person",
-        name: "Vasco Neves",
-        jobTitle: "Senior Frontend Engineer",
-        url: "https://www.vasconeves.com/",
-        image: "https://www.vasconeves.com/og.jpg",
+        name: site.name,
+        jobTitle: site.role,
+        url: absoluteUrl("/"),
+        image: ogImage,
+        email: `mailto:${site.email}`,
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Lisbon",
-          addressCountry: "PT",
+          addressLocality: site.location.city,
+          addressCountry: site.location.countryCode,
         },
-        knowsAbout: ["Vue.js", "Nuxt", "TypeScript", "Vitest", "Playwright"],
-        sameAs: [
-          "https://github.com/nevespvasco",
-          "https://www.linkedin.com/in/nevespvasco",
-        ],
+        knowsAbout: site.knowsAbout,
+        sameAs: site.socials.map((social) => social.url),
       }),
     },
   ],

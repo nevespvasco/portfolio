@@ -1,21 +1,24 @@
 <template>
   <footer>
     <span class="footer-copyright">
-      &#169; {{ new Date().getFullYear() }} / Vasco Neves
+      &#169; {{ new Date().getFullYear() }} / {{ site.name }}
     </span>
     <div class="footer-icons">
-      <a href="https://github.com/nevespvasco" aria-label="GitHub">
-        <Icon name="mdi:github" aria-hidden="true" />
-      </a>
-      <a href="https://www.linkedin.com/in/nevespvasco" aria-label="LinkedIn">
-        <Icon name="mdi:linkedin" aria-hidden="true" />
-      </a>
-      <a href="mailto:nevespvasco+jobs@gmail.com" aria-label="Email">
-        <Icon name="material-symbols:mail" aria-hidden="true" />
+      <a
+        v-for="link in contactLinks"
+        :key="link.label"
+        :href="link.url"
+        :aria-label="link.label"
+      >
+        <Icon :name="link.icon" aria-hidden="true" />
       </a>
     </div>
   </footer>
 </template>
+
+<script lang="ts" setup>
+import { contactLinks, site } from "#shared/site";
+</script>
 
 <style lang="scss">
 footer {

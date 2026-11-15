@@ -19,7 +19,7 @@
       </defs>
     </svg>
 
-    <a id="gooey-button" href="https://book.schedly.io/nevespvasco">
+    <a id="gooey-button" :href="site.bookingUrl">
       Book Now
       <span class="bubbles">
         <span class="bubble" />
@@ -36,6 +36,10 @@
     </a>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { site } from "#shared/site";
+</script>
 
 <style lang="scss" scoped>
 @use "sass:math";

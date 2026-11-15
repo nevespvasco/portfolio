@@ -6,32 +6,33 @@
         <img
           src="@/assets/img/profile_pic.jpg"
           class="profile-pic"
-          alt="profile photo of me"
+          :alt="site.name"
         >
       </div>
       <div>
         <div class="location-container">
           <span class="location-info">
             <Icon name="bi:globe-europe-africa" class="location-icon" aria-hidden="true" />
-            Lisbon, Portugal
+            {{ locationLabel }}
           </span>
         </div>
         <div class="language-container">
-          <p class="language-tag">English</p>
-          <p class="language-tag">Portuguese</p>
+          <p v-for="language in site.languages" :key="language" class="language-tag">
+            {{ language }}
+          </p>
         </div>
         <div class="name-container">
-          <h1 class="name">Vasco Neves</h1>
+          <h1 class="name">{{ site.name }}</h1>
         </div>
         <div class="title-container">
-          <h2 class="title">Senior Frontend Engineer</h2>
+          <h2 class="title">{{ site.role }}</h2>
         </div>
         <div class="social-container">
-          <ul v-if="socialLinks.length > 0" class="social-list">
-            <li v-for="social in socialLinks" :key="social.id">
-              <a :href="social.link" class="social-item">
+          <ul class="social-list">
+            <li v-for="social in contactLinks" :key="social.label">
+              <a :href="social.url" class="social-item">
                 <Icon :name="social.icon" class="social-icon" aria-hidden="true" />
-                <span class="social-title">{{ social.title }}</span>
+                <span class="social-title">{{ social.label }}</span>
               </a>
             </li>
           </ul>
@@ -116,34 +117,7 @@
 
 <script lang="ts" setup>
 import { projects } from "~/data/projects";
-
-const socialLinks = ref<
-  {
-    id: number;
-    title: string;
-    icon: string;
-    link: string;
-  }[]
->([
-  {
-    id: 0,
-    title: "GitHub",
-    icon: "mdi:github",
-    link: "https://github.com/nevespvasco",
-  },
-  {
-    id: 1,
-    title: "LinkedIn",
-    icon: "mdi:linkedin",
-    link: "https://www.linkedin.com/in/nevespvasco",
-  },
-  {
-    id: 2,
-    title: "Email",
-    icon: "material-symbols:mail",
-    link: "mailto:nevespvasco+jobs@gmail.com",
-  },
-]);
+import { contactLinks, locationLabel, site } from "#shared/site";
 
 const technicalIcons = ref<
   {
