@@ -55,113 +55,15 @@
 
     <section aria-labelledby="skills-heading">
       <UiSectionHeading id="skills-heading">Technical Skills</UiSectionHeading>
-      <div class="technical-skills-icons">
-        <div
-          v-for="technical in technicalIcons"
-          :key="technical.id"
-          class="technical-skill"
-        >
-          <Icon
-            :name="technical.icon"
-            class="technical-skills-icon"
-            aria-hidden="true"
-            :class="[
-              technical.isOver ? 'technical-skills-icon--animation' : '',
-            ]"
-            @mouseover="technical.isOver = true"
-            @mouseleave="technical.isOver = false"
-          />
-          <p :style="{ color: technical.isOver ? technical.colorName : '' }">
-            {{ technical.name }}
-          </p>
-        </div>
-      </div>
-      <p class="lead skills-also">
-        Also: Vitest, Playwright, TanStack Query, NestJS, PostgreSQL, MySQL,
-        Figma, Claude API.
-      </p>
+      <SkillGroups :groups="skillGroups" />
     </section>
   </UiPageContainer>
 </template>
 
 <script lang="ts" setup>
 import { projects } from "~/data/projects";
+import { skillGroups } from "~/data/skills";
 import { contactLinks, locationLabel, site } from "#shared/site";
-
-const technicalIcons = ref<
-  {
-    id: number;
-    icon: string;
-    isOver: boolean;
-    name: string;
-    colorName: string;
-  }[]
->([
-  {
-    id: 0,
-    icon: "logos:vue",
-    isOver: false,
-    name: "Vue",
-    colorName: "#41B883",
-  },
-  {
-    id: 1,
-    icon: "logos:nuxt-icon",
-    isOver: false,
-    name: "Nuxt",
-    colorName: "#00DC82",
-  },
-  {
-    id: 2,
-    icon: "logos:pinia",
-    isOver: false,
-    name: "Pinia",
-    colorName: "#ffd04a",
-  },
-  {
-    id: 3,
-    icon: "logos:laravel",
-    isOver: false,
-    name: "Laravel",
-    colorName: "#FF2D20",
-  },
-  {
-    id: 4,
-    icon: "devicon:react",
-    isOver: false,
-    name: "React",
-    colorName: "#61DAFB",
-  },
-  {
-    id: 5,
-    icon: "logos:redux",
-    isOver: false,
-    name: "Redux",
-    colorName: "#764ABC",
-  },
-  {
-    id: 6,
-    icon: "logos:docker-icon",
-    isOver: false,
-    name: "Docker",
-    colorName: "#2396ED",
-  },
-  {
-    id: 7,
-    icon: "logos:typescript-icon",
-    isOver: false,
-    name: "TypeScript",
-    colorName: "#3178C6",
-  },
-  {
-    id: 8,
-    icon: "logos:tailwindcss-icon",
-    isOver: false,
-    name: "Tailwind CSS",
-    colorName: "#44a8b3",
-  },
-]);
-
 </script>
 
 <style lang="scss" scoped>
@@ -241,64 +143,5 @@ const technicalIcons = ref<
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.technical-skills-icons {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
-  padding-top: var(--space-4);
-}
-
-.technical-skill {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  p {
-    margin: var(--space-2) 0 0;
-    text-align: center;
-  }
-}
-
-.technical-skills-icon {
-  font-size: 2em;
-}
-
-.skills-also {
-  color: var(--color-text-muted);
-}
-
-@keyframes zoom-in {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@media (min-width: 768px) {
-  .technical-skills-icons {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .technical-skills-icon {
-    filter: grayscale(100%);
-
-    &.technical-skills-icon--animation {
-      animation: 1s ease-out 0s 1 zoom-in;
-      filter: grayscale(0);
-    }
-  }
-}
-
-@media (min-width: 1290px) {
-  .technical-skills-icons {
-    grid-template-columns: repeat(5, 1fr);
-  }
 }
 </style>
