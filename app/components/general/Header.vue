@@ -188,6 +188,13 @@ onBeforeUnmount(() => {
   }
 }
 
+// The nav stays above the Book a call bubbles, which rise past it in the
+// mobile menu.
+.nav {
+  position: relative;
+  z-index: 1;
+}
+
 // Mobile: the menu is a full-width panel that drops in under the bar. It
 // stays rendered so it can fade both ways; `visibility` keeps it out of the
 // tab order and the accessibility tree while closed.

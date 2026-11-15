@@ -28,6 +28,9 @@ const leadId = useId();
 }
 
 .lead {
+  /* Above the Book a call bubbles, which rise past it. */
+  position: relative;
+  z-index: 1;
   margin: 0 0 var(--space-4);
   font-size: var(--text-xl);
   font-weight: 500;

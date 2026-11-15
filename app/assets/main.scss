@@ -149,8 +149,16 @@ body::-webkit-scrollbar-thumb {
 #__nuxt,
 #app {
   min-height: 100vh;
-  // iOS Safari's 100vh assumes the address bar is hidden; dvh tracks it.
-  min-height: 100dvh;
+}
+
+// iOS Safari's 100vh assumes the address bar is hidden; dvh tracks it. In an
+// @supports block so the minifier can't drop 100vh as "overridden" and leave
+// older browsers with no minimum height at all.
+@supports (min-height: 100dvh) {
+  #__nuxt,
+  #app {
+    min-height: 100dvh;
+  }
 }
 
 #app {

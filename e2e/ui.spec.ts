@@ -68,7 +68,7 @@ test.describe("\"Book a call\" bubbles", () => {
     filters.forEach((filter, i) => expect(filter).toContain(`#${ids[i]}`));
   });
 
-  test("bubbles stay just above their button and never take clicks", async ({ page }) => {
+  test("bubbles rise off their button's top edge and never take clicks", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
     for (const fraction of [0, 0.5, 0.99]) {
@@ -79,7 +79,7 @@ test.describe("\"Book a call\" bubbles", () => {
           const b = (await bubble.boundingBox())!;
           expect(b.x).toBeGreaterThanOrEqual(box.x - 1);
           expect(b.x + b.width).toBeLessThanOrEqual(box.x + box.width + 1);
-          expect(b.y).toBeGreaterThanOrEqual(box.y - 16);
+          expect(b.y).toBeGreaterThanOrEqual(box.y - 131);
           expect(b.y + b.height).toBeLessThanOrEqual(box.y + box.height);
         }
       }
