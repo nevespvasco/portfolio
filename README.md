@@ -4,7 +4,7 @@ Personal portfolio of Vasco Neves, Senior Frontend Engineer. Built with Nuxt 4 a
 
 ## Requirements
 
-- Node.js 24 (pinned in `package.json` `engines`, matching the Vercel runtime)
+- Node.js 26 (pinned in `package.json` `engines`, matching the Vercel runtime)
 
 ## Scripts
 
