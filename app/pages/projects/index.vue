@@ -1,6 +1,6 @@
 <template>
   <UiPageContainer>
-    <h1 class="title">Projects</h1>
+    <h1 class="title">Selected projects</h1>
     <p class="intro">
       Products and tools I have designed, built and shipped on my own: what
       problem each one solves, the decisions behind it and how it turned out.
