@@ -39,4 +39,21 @@ const leadId = useId();
   align-items: center;
   gap: var(--space-3);
 }
+
+/* The primary (filled) and secondary (outlined) actions share one size here,
+   whatever their defaults are elsewhere. */
+.actions > a {
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: var(--space-2) 1.1rem;
+  font-size: var(--text-base);
+}
+
+/* Narrow phones: one per row, both full width. */
+@media (max-width: 25rem) {
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
 </style>
