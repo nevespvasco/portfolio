@@ -21,9 +21,9 @@
         <span class="status" :class="`status--${project.status}`">{{ statusLabels[project.status] }}</span>
         <span>{{ project.year }}</span>
       </p>
-      <h3 class="title">
+      <component :is="headingLevel" class="title">
         <NuxtLink :to="href">{{ project.name }}</NuxtLink>
-      </h3>
+      </component>
       <p class="outcome">{{ project.outcome }}</p>
       <UiTagList :tags="project.tags" />
       <ProjectLinks :project="project" class="links" />
@@ -34,13 +34,15 @@
 <script lang="ts" setup>
 import { type Project, projectPath, statusLabels } from "#shared/projects";
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   project: Project;
+  /** Heading level of the title, so the page's outline has no gaps. */
+  headingLevel?: "h2" | "h3";
   /** Smaller layout for lists on the home page. */
   compact?: boolean;
   /** Load the cover eagerly: set it for the first card on a page. */
   priority?: boolean;
-}>();
+}>(), { headingLevel: "h3" });
 const href = computed(() => projectPath(props.project.slug));
 </script>
 
