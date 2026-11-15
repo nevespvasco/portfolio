@@ -32,7 +32,7 @@ export const roles: Role[] = [
       "OFFX is a venue for private-market liquidity: locked and liquid tokens, pre-IPO equity secondaries, fund secondaries and SPVs, used by 1,000+ institutional counterparties.",
       "I work on the frontend of the trading platform across the whole deal lifecycle: exploring assets, creating listings with premium/discount pricing and public, targeted or private distribution, negotiating bids and offers, and following deals through to settlement, including token lockup and unlock data and price-history charts.",
     ],
-    stack: ["Vue 3", "Nuxt", "TypeScript", "Pinia", "TanStack Query", "Vitest", "Playwright", "Figma"],
+    stack: ["Vue 3", "Nuxt", "TypeScript", "Pinia", "TanStack Query", "Vitest", "Playwright", "SonarQube", "Terraform", "Webflow", "Figma"],
   },
   {
     company: "Siemens",
