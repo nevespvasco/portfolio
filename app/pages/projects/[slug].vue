@@ -5,11 +5,7 @@
       <h1 class="project-name">{{ project.name }}</h1>
       <p class="outcome">{{ project.outcome }}</p>
       <UiTagList :tags="project.tags" />
-      <p v-if="project.repo" class="repo">
-        <a :href="project.repo">
-          View the repository on GitHub<Icon name="material-symbols:arrow-outward" aria-hidden="true" />
-        </a>
-      </p>
+      <ProjectLinks :project="project" class="repo" />
 
       <section v-for="section in project.sections" :key="section.heading">
         <UiSectionHeading>{{ section.heading }}</UiSectionHeading>

@@ -4,25 +4,142 @@ export interface ProjectSection {
   bullets?: string[];
 }
 
+export interface ProjectImage {
+  /** Path under public/, e.g. "/projects/cirnota/cover.webp". */
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+export type ProjectStatus = "production" | "open-source";
+
 export interface Project {
   slug: string;
   name: string;
   outcome: string;
   tags: string[];
+  year: number;
+  role: string;
+  status: ProjectStatus;
+  /** Shown on the home page under "Selected projects". */
+  featured?: boolean;
+  /** Source code, when it is public. */
   repo?: string;
+  /** The running product, when there is one. */
+  live?: string;
+  cover?: ProjectImage;
+  gallery?: ProjectImage[];
   sections: ProjectSection[];
 }
 
-/** Where the projects list lives on the home page. */
-export const projectsListPath = "/#projects";
+export const statusLabels: Record<ProjectStatus, string> = {
+  production: "In production",
+  "open-source": "Open source",
+};
+
+/** The projects list page. */
+export const projectsListPath = "/projects";
 
 /** Path of a project's case-study page. */
 export const projectPath = (slug: string) => `/projects/${slug}`;
 
 export const projects: Project[] = [
   {
+    slug: "cirnota",
+    name: "Cirnota",
+    live: "https://cirnota.pt",
+    year: 2026,
+    role: "Solo developer",
+    status: "production",
+    featured: true,
+    outcome:
+      "A surgical portfolio for doctors in Portugal, in production: log surgeries on the day, see what is left for residency minimums, and export a CV as PDF or Word.",
+    tags: ["React 19", "TypeScript", "Vite", "NestJS", "PostgreSQL"],
+    sections: [
+      {
+        heading: "Problem",
+        paragraphs: [
+          "Surgical residents in Portugal have to prove a minimum number of procedures and keep a CV of their surgical, training and scientific activity. Tracking that by hand across hospitals is slow and easy to get wrong.",
+        ],
+      },
+      {
+        heading: "Approach",
+        paragraphs: [
+          "A monorepo with the product app (React 19, TypeScript, Vite), a NestJS API with PostgreSQL, and a marketing site that shares the app's design tokens.",
+        ],
+        bullets: [
+          "Records are organised by hospital and cover surgeries, training and scientific activity.",
+        ],
+      },
+      {
+        heading: "Key decisions",
+        bullets: [
+          "Privacy and security built in from day one: least-privilege data access, two-factor login and an audit trail.",
+          "Decisions recorded as architecture decision records (9 so far).",
+        ],
+      },
+      {
+        heading: "Result",
+        bullets: [
+          "Live at cirnota.pt.",
+          "CI on every change: typecheck, lint, tests, a dependency audit and a production boot smoke test, with separate staging and production deploy pipelines.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "a-minha-rua",
+    name: "A Minha Rua",
+    live: "https://isometric-lisbon-sigma.vercel.app",
+    year: 2026,
+    role: "Solo developer",
+    status: "production",
+    featured: true,
+    outcome:
+      "Turns any address in Portugal into an isometric pixel-art poster, drawn from OpenStreetMap with the real sun position and live weather.",
+    tags: ["Nuxt 4", "Vue 3", "TypeScript", "three.js", "Stripe"],
+    sections: [
+      {
+        heading: "Problem",
+        paragraphs: [
+          "A poster of your own street usually means a generic map print or a commissioned illustration. I wanted any place in Portugal drawn as pixel art, on demand.",
+        ],
+      },
+      {
+        heading: "Approach",
+        paragraphs: [
+          "You search for a place and the app draws the roughly 300 m square around it from OpenStreetMap buildings, roads, water and parks, rendered deterministically with three.js at 360×480 art pixels.",
+        ],
+        bullets: [
+          "Four camera orientations, and the real sun at the place for any day and hour, with cast shadows and a palette for the hour.",
+          "Live weather from METAR, IPMA and DWD along a timeline, or a chosen look (season, clouds, rain, fog, snow).",
+          "Painted previews from an image model, held to the plain render by a guard so water and paper stay where they belong.",
+        ],
+      },
+      {
+        heading: "Key decisions",
+        bullets: [
+          "Every painted preview is kept as a public variation of its 100 m cell and shown on a shared board, so the next visitor there can reuse it.",
+          "Abuse limits on paid model calls, so a single visitor cannot run up the bill.",
+          "Map data and searches cached on disk; decisions recorded as ADRs (9 so far).",
+        ],
+      },
+      {
+        heading: "Result",
+        bullets: [
+          "Live, with Stripe checkout, print files in Blob storage and order emails.",
+          "Lisbon verified city by city so far; other places work and are labelled beta.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "filebridge",
     name: "filebridge",
+    year: 2026,
+    role: "Solo developer",
+    status: "open-source",
+    featured: true,
     outcome:
       "Turned a 31-hour manual server migration into a 5-step wizard that resumes after a crash and verifies every file with SHA-256.",
     tags: ["Vue 3", "TypeScript", "Tauri 2", "Rust", "SQLite"],
@@ -66,6 +183,9 @@ export const projects: Project[] = [
   {
     slug: "pushguard",
     name: "PushGuard",
+    year: 2026,
+    role: "Solo developer",
+    status: "open-source",
     outcome:
       "AI code review on every git push, with three strictness presets and a fail-open design that never blocks a push.",
     tags: ["TypeScript", "Node.js", "CLI", "LLM APIs"],
