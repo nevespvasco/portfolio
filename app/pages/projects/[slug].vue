@@ -1,19 +1,16 @@
 <template>
-  <main class="main-container">
-    <section />
-    <article v-if="project">
+  <UiPageContainer>
+    <article v-if="project" class="case-study">
       <p class="back"><NuxtLink to="/#projects">← All projects</NuxtLink></p>
       <h1 class="project-name">{{ project.name }}</h1>
       <p class="outcome">{{ project.outcome }}</p>
-      <ul class="tag-list">
-        <li v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</li>
-      </ul>
+      <UiTagList :tags="project.tags" />
       <p v-if="project.repo" class="repo">
         <a :href="project.repo">View the repository on GitHub</a>
       </p>
 
       <section v-for="section in project.sections" :key="section.heading">
-        <h2 class="section-heading">{{ section.heading }}</h2>
+        <UiSectionHeading>{{ section.heading }}</UiSectionHeading>
         <p v-for="(paragraph, i) in section.paragraphs" :key="i">
           {{ paragraph }}
         </p>
@@ -27,8 +24,7 @@
         <a :href="emailLink.url">Email me</a>.
       </p>
     </article>
-    <section />
-  </main>
+  </UiPageContainer>
 </template>
 
 <script lang="ts" setup>
@@ -56,71 +52,31 @@ useHead({
 </script>
 
 <style lang="scss" scoped>
-.main-container {
-  display: grid;
-  grid-template-columns: 90%;
-  justify-content: center;
-  line-height: 1.6rem;
-}
-
-a {
-  color: var(--green);
-}
-
 .back {
-  margin-top: 2rem;
+  margin-top: var(--space-6);
 }
 
 .project-name {
-  font-weight: 800;
-  font-size: 3rem;
-  line-height: initial;
-  margin: 1rem 0 0.5rem;
+  margin: var(--space-4) 0 var(--space-2);
+  font-size: var(--text-4xl);
 }
 
 .outcome {
-  font-size: 1.2rem;
-  color: var(--scheme-gray-800);
+  margin: 0 0 var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--text-xl);
+  line-height: 1.5;
 }
 
-.tag-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-}
-
-.tag {
-  border: 1px solid var(--scheme-gray-300);
-  padding: 0.15rem 0.6rem;
-  border-radius: 1rem;
-}
-
-.section-heading {
-  font-weight: 700;
-  font-size: 1.6rem;
-  margin: 2rem 0 0.5rem;
+.repo {
+  margin: var(--space-4) 0 0;
 }
 
 .bullets li {
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-2);
 }
 
 .contact {
-  margin: 3rem 0 6rem;
-}
-
-@media (min-width: 768px) {
-  .main-container {
-    grid-template-columns: 20% 60% 20%;
-  }
-}
-
-@media (min-width: 1290px) {
-  .main-container {
-    grid-template-columns: 30% 40% 30%;
-  }
+  margin: var(--space-7) 0 var(--space-8);
 }
 </style>

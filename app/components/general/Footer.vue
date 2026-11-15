@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <span class="footer-copyright">
+    <span>
       &#169; {{ new Date().getFullYear() }} / {{ site.name }}
     </span>
     <div class="footer-icons">
@@ -20,37 +20,39 @@
 import { contactLinks, site } from "#shared/site";
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 footer {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  margin: 3rem auto 1rem auto;
-  font-size: 0.825rem;
   align-items: center;
-  gap: 1rem;
-}
-
-.footer-copyright {
-  color: var(--white);
+  justify-content: center;
+  gap: var(--space-4);
+  margin: var(--space-7) auto var(--space-4);
+  font-size: var(--text-sm);
 }
 
 .footer-icons {
   display: flex;
   gap: 1.25rem;
+
   a {
     color: inherit;
     font-size: 1.5em;
     line-height: 0;
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 4px;
+    }
   }
 }
 
 @media (min-width: 768px) {
   footer {
-    justify-content: space-around;
     flex-direction: row;
-    margin: 1rem 0;
+    justify-content: space-around;
     gap: 0;
+    margin: var(--space-4) 0;
   }
 }
 </style>

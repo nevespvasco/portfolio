@@ -44,8 +44,7 @@ import { site } from "#shared/site";
 <style lang="scss" scoped>
 @use "sass:math";
 
-$prime: var(--green);
-$second: var(--scheme-aqua-200);
+$prime: var(--color-accent);
 
 svg {
   position: absolute;
@@ -61,7 +60,7 @@ svg {
   padding: 0.6rem 2rem;
   font-size: 1rem;
   border: none;
-  color: var(--white);
+  color: var(--color-text);
   filter: url("#gooey");
   position: relative;
   background-color: $prime;

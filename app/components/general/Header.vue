@@ -78,10 +78,10 @@ const routerLinks = ref<
 
 .router-list {
   display: flex;
-  color: var(--white);
+  color: var(--color-text);
   list-style-type: none;
-  border: 1px solid var(--scheme-gray-600-30);
-  background-color: var(--scheme-gray-100);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg);
   padding: 0.25rem;
   border-radius: 0.75rem;
   gap: 0.25rem;
@@ -100,8 +100,8 @@ const routerLinks = ref<
     border: 1px solid transparent;
     transition: background-color 0.5s ease, border-color 0.5s ease;
     &:hover {
-      background-color: var(--scheme-gray-600-10);
-      border: 1px solid var(--scheme-gray-600-30);
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
     }
   }
 }
@@ -115,8 +115,8 @@ const routerLinks = ref<
 }
 
 .active-route {
-  background-color: var(--scheme-gray-600-30);
-  border: 1px solid var(--scheme-gray-600-30);
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
 }
 
 .tooltip-box {
@@ -126,7 +126,7 @@ const routerLinks = ref<
     opacity: 1;
   }
   .tooltip {
-    color: var(--white);
+    color: var(--color-text);
     text-align: center;
     padding: 5px 0;
     border-radius: 2px;
@@ -139,7 +139,7 @@ const routerLinks = ref<
     transition-timing-function: cubic-bezier(0.1, 0.5, 0.1);
     position: absolute;
     z-index: 1;
-    background-color: var(--scheme-gray-300);
+    background-color: var(--color-tooltip);
   }
 }
 
@@ -151,7 +151,7 @@ const routerLinks = ref<
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: var(--scheme-gray-300) transparent transparent transparent;
+  border-color: var(--color-tooltip) transparent transparent transparent;
 }
 
 @media (min-width: 768px) {
@@ -178,7 +178,7 @@ const routerLinks = ref<
   }
 
   .router-list {
-    background-color: var(--static-black-medium);
+    background-color: var(--color-overlay);
     width: fit-content;
   }
 
