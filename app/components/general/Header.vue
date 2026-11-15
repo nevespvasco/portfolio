@@ -7,7 +7,7 @@
           <NuxtLink
             :to="item.to"
             :class="['nav-item', { 'nav-item--active': item.id === active }]"
-            :aria-current="item.id === active ? 'page' : undefined"
+            :aria-current="item.id === active ? 'true' : undefined"
             @click="scrollIfAlreadyHome(item.to)"
           >
             <Icon :name="item.icon" class="nav-icon" aria-hidden="true" />
@@ -23,6 +23,7 @@
 </template>
 
 <script lang="ts" setup>
+import { projectsListPath } from "#shared/projects";
 import { site } from "#shared/site";
 import type { NavItem } from "~/utils/navigation";
 
@@ -32,7 +33,7 @@ const navItems: { id: NavItem; label: string; icon: string; to: string }[] = [
     id: "projects",
     label: "Projects",
     icon: "material-symbols:book-2-outline-rounded",
-    to: "/#projects",
+    to: projectsListPath,
   },
 ];
 

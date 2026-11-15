@@ -9,7 +9,6 @@
   --color-surface: #9595951a;
   --color-surface-raised: #9595954d;
   --color-overlay: #00000027;
-  --color-tooltip: #3f3f3f;
 
   /* Colour: borders */
   --color-border: #9595954d;
@@ -90,6 +89,28 @@ a {
   color: var(--color-accent);
   font-weight: 500;
   text-underline-offset: 0.2em;
+}
+
+// Route change: fade and blur out, then in (disabled under reduced motion).
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
+  .page-enter-from,
+  .page-leave-to {
+    filter: none;
+  }
 }
 
 // Safety net for anything not handled per component: no motion at all when

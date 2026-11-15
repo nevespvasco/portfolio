@@ -7,16 +7,18 @@
     <UiTagList :tags="project.tags" />
     <p class="card-links">
       <NuxtLink :to="href">Case study</NuxtLink>
-      <a v-if="project.repo" :href="project.repo">Repository</a>
+      <a v-if="project.repo" :href="project.repo">
+        Repository<Icon name="material-symbols:arrow-outward" aria-hidden="true" /><span class="visually-hidden">(GitHub)</span>
+      </a>
     </p>
   </article>
 </template>
 
 <script lang="ts" setup>
-import type { Project } from "#shared/projects";
+import { type Project, projectPath } from "#shared/projects";
 
 const props = defineProps<{ project: Project }>();
-const href = computed(() => `/projects/${props.project.slug}`);
+const href = computed(() => projectPath(props.project.slug));
 </script>
 
 <style lang="scss" scoped>

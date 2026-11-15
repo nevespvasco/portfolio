@@ -9,12 +9,8 @@
         <h1 id="error-title" class="title">{{ heading }}</h1>
         <p class="message">{{ message }}</p>
         <div class="actions">
-          <button type="button" class="action" @click="leave('/#projects')">
-            See all projects
-          </button>
-          <button type="button" class="action" @click="leave('/')">
-            Go to the home page
-          </button>
+          <UiLinkButton :to="projectsListPath">See all projects</UiLinkButton>
+          <UiLinkButton to="/">Go to the home page</UiLinkButton>
         </div>
       </section>
     </UiPageContainer>
@@ -24,6 +20,7 @@
 
 <script lang="ts" setup>
 import type { NuxtError } from "#app";
+import { projectsListPath } from "#shared/projects";
 import { site } from "#shared/site";
 
 const props = defineProps<{ error: NuxtError }>();
@@ -43,10 +40,6 @@ useHead({
   title: computed(() => `${heading.value} · ${site.name}`),
   htmlAttrs: { lang: "en" },
 });
-
-function leave(to: string) {
-  clearError({ redirect: to });
-}
 </script>
 
 <style lang="scss" scoped>
@@ -76,25 +69,5 @@ function leave(to: string) {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
-}
-
-.action {
-  padding: 0.5rem var(--space-4);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface);
-  color: var(--color-text);
-  font: inherit;
-  font-weight: 500;
-  cursor: pointer;
-
-  &:hover {
-    border-color: var(--color-border-strong);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
-  }
 }
 </style>

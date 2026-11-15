@@ -1,6 +1,6 @@
 <template>
-  <aside class="contact-cta" aria-labelledby="contact-cta-lead">
-    <p id="contact-cta-lead" class="lead">
+  <aside class="contact-cta" :aria-labelledby="leadId">
+    <p :id="leadId" class="lead">
       <slot>Want to talk?</slot>
     </p>
     <div class="actions">
@@ -14,6 +14,8 @@
 
 <script lang="ts" setup>
 import { emailLink } from "#shared/site";
+
+const leadId = useId();
 </script>
 
 <style scoped>

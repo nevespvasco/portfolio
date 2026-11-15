@@ -10,7 +10,11 @@ updates:
       vercel:
         patterns: ["@vercel/*"]
       tooling:
-        patterns: ["eslint", "typescript", "sass-embedded"]
+        patterns: ["eslint", "typescript", "sass-embedded", "sharp"]
+      testing:
+        patterns: ["vitest", "@playwright/*", "@axe-core/*"]
+      icons:
+        patterns: ["@iconify-json/*"]
   - package-ecosystem: github-actions
     directory: /
     schedule:

@@ -1,12 +1,14 @@
 <template>
   <UiPageContainer>
     <article v-if="project" class="case-study">
-      <p class="back"><NuxtLink to="/#projects">← All projects</NuxtLink></p>
+      <p class="back"><NuxtLink :to="projectsListPath">← All projects</NuxtLink></p>
       <h1 class="project-name">{{ project.name }}</h1>
       <p class="outcome">{{ project.outcome }}</p>
       <UiTagList :tags="project.tags" />
       <p v-if="project.repo" class="repo">
-        <a :href="project.repo">View the repository on GitHub</a>
+        <a :href="project.repo">
+          View the repository on GitHub<Icon name="material-symbols:arrow-outward" aria-hidden="true" />
+        </a>
       </p>
 
       <section v-for="section in project.sections" :key="section.heading">
@@ -24,7 +26,7 @@
       <nav v-if="previous || next" class="project-nav" aria-label="More projects">
         <NuxtLink
           v-if="previous"
-          :to="`/projects/${previous.slug}`"
+          :to="projectPath(previous.slug)"
           class="project-nav-link project-nav-link--previous"
         >
           <span class="project-nav-label">← Previous project</span>
@@ -32,7 +34,7 @@
         </NuxtLink>
         <NuxtLink
           v-if="next"
-          :to="`/projects/${next.slug}`"
+          :to="projectPath(next.slug)"
           class="project-nav-link project-nav-link--next"
         >
           <span class="project-nav-label">Next project →</span>
@@ -44,7 +46,12 @@
 </template>
 
 <script lang="ts" setup>
-import { adjacentProjects, projects } from "#shared/projects";
+import {
+  adjacentProjects,
+  projectPath,
+  projects,
+  projectsListPath,
+} from "#shared/projects";
 import { absoluteUrl, site } from "#shared/site";
 
 const route = useRoute();
@@ -55,7 +62,7 @@ if (!project) {
 }
 
 const title = `${project.name} · ${site.name}`;
-const url = absoluteUrl(`/projects/${project.slug}`);
+const url = absoluteUrl(projectPath(project.slug));
 
 useHead({ link: [{ rel: "canonical", href: url }] });
 useSeoMeta({

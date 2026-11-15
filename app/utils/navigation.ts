@@ -1,3 +1,5 @@
+import { projectPath } from "#shared/projects";
+
 export type NavItem = "home" | "projects";
 
 /**
@@ -5,6 +7,6 @@ export type NavItem = "home" | "projects";
  * while the home page's Projects section is on screen, Home otherwise.
  */
 export function activeNavItem(path: string, projectsInView: boolean): NavItem {
-  if (path.startsWith("/projects/")) return "projects";
+  if (path.startsWith(projectPath(""))) return "projects";
   return projectsInView ? "projects" : "home";
 }

@@ -13,6 +13,12 @@ export interface Project {
   sections: ProjectSection[];
 }
 
+/** Where the projects list lives on the home page. */
+export const projectsListPath = "/#projects";
+
+/** Path of a project's case-study page. */
+export const projectPath = (slug: string) => `/projects/${slug}`;
+
 export const projects: Project[] = [
   {
     slug: "filebridge",

@@ -35,8 +35,9 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
-    // The sitemap is generated from the projects list at build time.
-    prerender: { routes: ["/sitemap.xml"] },
+    // Sitemap and robots.txt are generated from the site config and projects
+    // list at build time.
+    prerender: { routes: ["/sitemap.xml", "/robots.txt"] },
   },
   app: {
     pageTransition: { name: "page", mode: "out-in" },

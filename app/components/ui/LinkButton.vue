@@ -2,11 +2,16 @@
   <NuxtLink :to="to" class="link-button">
     <Icon v-if="icon" :name="icon" class="link-button-icon" aria-hidden="true" />
     <slot />
+    <template v-if="external">
+      <Icon name="material-symbols:arrow-outward" class="link-button-external" aria-hidden="true" />
+      <span class="visually-hidden">(external site)</span>
+    </template>
   </NuxtLink>
 </template>
 
 <script lang="ts" setup>
-defineProps<{ to: string; icon?: string }>();
+const props = defineProps<{ to: string; icon?: string }>();
+const external = computed(() => /^https?:\/\//.test(props.to));
 </script>
 
 <style lang="scss" scoped>
@@ -37,5 +42,10 @@ defineProps<{ to: string; icon?: string }>();
 
 .link-button-icon {
   font-size: 1.2em;
+}
+
+.link-button-external {
+  font-size: 0.9em;
+  color: var(--color-text-muted);
 }
 </style>

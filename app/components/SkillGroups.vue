@@ -41,8 +41,6 @@ const groupId = (name: string) =>
   color: var(--color-text-muted);
   font-size: var(--text-sm);
   font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .skill-list {
