@@ -149,6 +149,8 @@ body::-webkit-scrollbar-thumb {
 #__nuxt,
 #app {
   min-height: 100vh;
+  // iOS Safari's 100vh assumes the address bar is hidden; dvh tracks it.
+  min-height: 100dvh;
 }
 
 #app {

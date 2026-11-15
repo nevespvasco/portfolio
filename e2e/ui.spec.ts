@@ -99,7 +99,7 @@ test.describe("\"Book a call\" bubbles", () => {
   test("there are no bubbles under reduced motion", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/");
-    await expect(page.locator(".book-call").first()).toBeVisible();
+    await expect(page.locator(".contact-cta .book-call")).toBeVisible();
     await expect(page.locator(".book-call .bubble")).not.toHaveCount(0);
     await expect(page.locator(".book-call .bubble").first()).toBeHidden();
   });

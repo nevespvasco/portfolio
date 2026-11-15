@@ -70,9 +70,12 @@ const groupId = (name: string) =>
     border-color 0.2s ease,
     transform 0.2s ease;
 
-  &:hover {
-    border-color: var(--color-border-strong);
-    transform: translateY(-2px);
+  // Only where hover is real: on touch screens it would stick after a tap.
+  @media (hover: hover) {
+    &:hover {
+      border-color: var(--color-border-strong);
+      transform: translateY(-2px);
+    }
   }
 }
 
