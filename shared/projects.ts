@@ -40,6 +40,10 @@ export const statusLabels: Record<ProjectStatus, string> = {
 /** The projects list page. */
 export const projectsListPath = "/projects";
 
+/** Social-preview image: the project's own JPEG card, else the site-wide one. */
+export const projectOgImage = (project: Pick<Project, "slug" | "cover">) =>
+  project.cover ? `/projects/${project.slug}/og.jpg` : "/og.jpg";
+
 /** Path of a project's case-study page. */
 export const projectPath = (slug: string) => `/projects/${slug}`;
 
