@@ -14,7 +14,7 @@
 //   - a generated cover for projects without a UI (PushGuard).
 //
 // PW_CHROMIUM_PATH points Playwright at an existing Chromium.
-import { mkdir } from "node:fs/promises";
+import { mkdir, stat } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { chromium, type Page } from "@playwright/test";
@@ -143,6 +143,10 @@ const browser = await chromium.launch({
 try {
   for (const shot of todo) {
     if ("file" in shot.source) {
+      if (!(await stat(shot.source.file).catch(() => null))) {
+        console.warn(`skipped ${shot.project}/${shot.name}: ${shot.source.file} not found (set ARTWORK_DIR)`);
+        continue;
+      }
       await saveArtwork(shot.source.file, shot.project, shot.name);
       continue;
     }

@@ -9,7 +9,10 @@
           <h2 class="company">{{ role.company }}</h2>
           <p class="role-title">{{ role.title }}</p>
           <p class="role-meta">
-            <time :datetime="role.start">{{ formatPeriod(role.start, role.end) }}</time>
+            <time :datetime="role.start">{{ formatMonth(role.start) }}</time>
+            –
+            <time v-if="role.end" :datetime="role.end">{{ formatMonth(role.end) }}</time>
+            <template v-else>Present</template>
             <span v-if="role.location"> · {{ role.location }}</span>
           </p>
           <p v-for="(paragraph, i) in role.paragraphs" :key="i" class="paragraph">
@@ -39,22 +42,21 @@
 </template>
 
 <script lang="ts" setup>
-import { currentRole, education, formatPeriod, roles } from "#shared/experience";
-import { absoluteUrl, site } from "#shared/site";
+import {
+  currentRole,
+  education,
+  experiencePath,
+  formatMonth,
+  roles,
+} from "#shared/experience";
 
-const title = `Experience · ${site.name}`;
-const description = `${currentRole.title} at ${currentRole.company}. Previously Siemens (SAP UI5 to Vue 3 migration, a Vue 3 component library), NOS SGPS, Sinmetro and others.`;
+const previous = roles
+  .filter((role) => role !== currentRole)
+  .slice(0, 3)
+  .map((role) => role.company);
+const description = `${currentRole.title} at ${currentRole.company}. Previously ${previous.join(", ")} and more.`;
 
-useHead({ link: [{ rel: "canonical", href: absoluteUrl("/experience") }] });
-useSeoMeta({
-  title,
-  description,
-  ogTitle: title,
-  ogDescription: description,
-  ogUrl: absoluteUrl("/experience"),
-  ogImage: absoluteUrl("/og.jpg"),
-  twitterCard: "summary_large_image",
-});
+usePageSeo({ title: "Experience", description, path: experiencePath });
 </script>
 
 <style lang="scss" scoped>

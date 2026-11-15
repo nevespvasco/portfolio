@@ -1,3 +1,4 @@
+import { experiencePath } from "./experience";
 import { projectPath, projectsListPath } from "./projects";
 import { absoluteUrl } from "./site";
 
@@ -6,7 +7,7 @@ export function sitemapUrls(projectSlugs: readonly string[]): string[] {
   return [
     absoluteUrl("/"),
     absoluteUrl(projectsListPath),
-    absoluteUrl("/experience"),
+    absoluteUrl(experiencePath),
     ...projectSlugs.map((slug) => absoluteUrl(projectPath(slug))),
   ];
 }

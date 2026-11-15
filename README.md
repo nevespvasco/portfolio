@@ -43,4 +43,4 @@ npm run og:projects                          # per-project 1200x630 JPEG for lin
 npm run og:card                              # the site-wide Open Graph card
 ```
 
-`screenshots` can also capture local apps showing demo data only: set `FILEBRIDGE_APP_URL` (filebridge with `VITE_MOCK=1`) or `CIRNOTA_APP_URL`, `CIRNOTA_DEMO_EMAIL` and `CIRNOTA_DEMO_PASSWORD`. Never capture production accounts. Look at every image before committing it.
+`screenshots` copies the A Minha Rua artwork from its own repository (`ARTWORK_DIR`, default `~/Documents/github/isometric-lisbon`) and skips it with a warning when that is missing. It can also capture local apps showing demo data only: set `FILEBRIDGE_APP_URL` (filebridge with `VITE_MOCK=1`) or `CIRNOTA_APP_URL`, `CIRNOTA_DEMO_EMAIL` and `CIRNOTA_DEMO_PASSWORD`. Never capture production accounts. Look at every image before committing it.

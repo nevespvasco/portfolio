@@ -15,22 +15,12 @@
 </template>
 
 <script lang="ts" setup>
-import { projects } from "#shared/projects";
-import { absoluteUrl } from "#shared/site";
+import { projectsListPath, projects } from "#shared/projects";
 
-const description =
-  "Products and tools I have built and shipped: a surgical portfolio for doctors, an isometric pixel-art poster maker, a file-transfer app and a git review hook.";
+const names = projects.map((project) => project.name);
+const description = `Products and tools I have built and shipped: ${names.slice(0, -1).join(", ")} and ${names.at(-1)}.`;
 
-useHead({ link: [{ rel: "canonical", href: absoluteUrl("/projects") }] });
-useSeoMeta({
-  title: "Projects · Vasco Neves",
-  description,
-  ogTitle: "Projects · Vasco Neves",
-  ogDescription: description,
-  ogUrl: absoluteUrl("/projects"),
-  ogImage: absoluteUrl("/og.jpg"),
-  twitterCard: "summary_large_image",
-});
+usePageSeo({ title: "Projects", description, path: projectsListPath });
 </script>
 
 <style lang="scss" scoped>
