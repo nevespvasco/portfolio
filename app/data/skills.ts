@@ -45,9 +45,11 @@ export const skillGroups: SkillGroup[] = [
   {
     name: "Tooling & AI",
     skills: [
+      { name: "Claude Code", icon: "logos:claude-code" },
+      { name: "Cursor", icon: "logos:cursor-icon", silhouette: true },
+      { name: "Claude API", icon: "logos:claude-icon" },
       { name: "Docker", icon: "logos:docker-icon" },
       { name: "Figma", icon: "logos:figma" },
-      { name: "Claude API", icon: "logos:claude-icon" },
     ],
   },
 ];

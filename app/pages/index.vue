@@ -31,13 +31,7 @@
       </ul>
     </section>
 
-    <p class="lead">
-      I build complex, data-heavy web applications with Vue 3, Nuxt and
-      TypeScript, where a wrong number or a broken state costs someone. I have
-      5+ years in frontend, from enterprise migrations and design systems to
-      test suites with Vitest and Playwright, and I ship the backend slice of
-      my own features too (Laravel, NestJS, PostgreSQL).
-    </p>
+    <p class="lead">{{ bio }}</p>
 
     <section id="projects" aria-labelledby="projects-heading">
       <UiSectionHeading id="projects-heading">Projects</UiSectionHeading>
@@ -50,16 +44,11 @@
 
     <section aria-labelledby="how-heading">
       <UiSectionHeading id="how-heading">How I build</UiSectionHeading>
-      <p class="lead">
-        I work AI-first every day with Claude Code and Cursor: I brief agents
-        on multi-file changes, review every diff they produce, and lean on
-        the test suites as guardrails. I own the decisions; the agents do the
-        typing.
-      </p>
+      <p class="lead">{{ copy.howIBuild }}</p>
     </section>
 
     <section aria-labelledby="skills-heading">
-      <UiSectionHeading id="skills-heading">Technical Skills</UiSectionHeading>
+      <UiSectionHeading id="skills-heading">Technical skills</UiSectionHeading>
       <SkillGroups :groups="skillGroups" />
     </section>
 
@@ -70,7 +59,9 @@
 <script lang="ts" setup>
 import { projects } from "#shared/projects";
 import { skillGroups } from "~/data/skills";
-import { contactLinks, locationLabel, site } from "#shared/site";
+import { contactLinks, copy, locationLabel, site } from "#shared/site";
+
+const bio = copy.bio();
 </script>
 
 <style lang="scss" scoped>

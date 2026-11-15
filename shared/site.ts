@@ -17,7 +17,9 @@ export const site = {
     "Vasco Neves, Senior Frontend Engineer in Lisbon. Data-heavy Vue 3, Nuxt and TypeScript apps, tested with Vitest and Playwright.",
   url: "https://www.vasconeves.com",
   location: { city: "Lisbon", country: "Portugal", countryCode: "PT" },
-  languages: ["English", "Portuguese"],
+  languages: ["Portuguese (native)", "English (fluent)"],
+  /** First year working in frontend; the bio counts years from it. */
+  careerStartYear: 2020,
   email,
   bookingUrl: "https://book.schedly.io/nevespvasco",
   socials: [
@@ -30,6 +32,19 @@ export const site = {
   ] satisfies SocialLink[],
   knowsAbout: ["Vue.js", "Nuxt", "TypeScript", "Vitest", "Playwright"],
 } as const;
+
+/** Whole years since careerStartYear, so the bio never needs a yearly edit. */
+export function yearsInFrontend(now = new Date()): number {
+  return now.getFullYear() - site.careerStartYear;
+}
+
+/** Home page copy about the owner. */
+export const copy = {
+  bio: () =>
+    `I build complex, data-heavy web applications with Vue 3, Nuxt and TypeScript, where a wrong number or a broken state costs someone. I have ${yearsInFrontend()}+ years in frontend, from enterprise migrations and design systems to test suites with Vitest and Playwright, and I ship the backend slice of my own features too (Laravel, NestJS, PostgreSQL).`,
+  howIBuild:
+    "I work AI-first every day with Claude Code and Cursor: I brief agents on multi-file changes, review every diff they produce, and lean on the test suites as guardrails. I own the decisions; the agents do the typing.",
+};
 
 export const locationLabel = `${site.location.city}, ${site.location.country}`;
 
