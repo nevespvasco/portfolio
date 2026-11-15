@@ -3,26 +3,26 @@
     <div class="location">Portugal/Lisbon</div>
     <div class="content--centered">
       <ul v-if="routerLinks.length > 0" class="router-list">
-        <li
-          v-for="router in routerLinks"
-          :key="router.id"
-          :class="[
-            'router-item',
-            'tooltip-box',
-            { 'active-route': router.routerName === route.fullPath },
-          ]"
-          @click="handlePageRedirect(router.routerName)"
-        >
-          <component
-            :is="router.iconName"
-            :size="{ width: '1.4em', height: '1.4em' }"
-          />
+        <li v-for="router in routerLinks" :key="router.id">
+          <NuxtLink
+            :to="router.routerName"
+            :class="[
+              'router-item',
+              'tooltip-box',
+              { 'active-route': router.routerName === route.fullPath },
+            ]"
+          >
+            <component
+              :is="router.iconName"
+              :size="{ width: '1.4em', height: '1.4em' }"
+            />
 
-          <span class="router-title">{{ router.title }}</span>
+            <span class="router-title">{{ router.title }}</span>
 
-          <div class="tooltip">
-            <span class="text">{{ router.title }}</span>
-          </div>
+            <div class="tooltip">
+              <span class="text">{{ router.title }}</span>
+            </div>
+          </NuxtLink>
         </li>
       </ul>
     </div>
@@ -56,16 +56,12 @@ const routerLinks = ref<
   },
   {
     id: 2,
-    title: "Blog",
+    title: "Projects",
     iconName: markRaw(IconsBook),
-    routerName: "/blog",
+    routerName: "/#projects",
     isCurrentRoute: false,
   },
 ]);
-
-const handlePageRedirect = async (routerName: string) => {
-  await navigateTo({ path: routerName });
-};
 </script>
 
 <style lang="scss" scoped>
@@ -97,6 +93,8 @@ const handlePageRedirect = async (routerName: string) => {
     0px 8px 16px rgba(0, 0, 0, 0.08);
 
   .router-item {
+    color: inherit;
+    text-decoration: none;
     cursor: pointer;
     display: flex;
     align-items: center;

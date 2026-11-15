@@ -1,1 +1,4 @@
+User-agent: *
+Allow: /
 
+Sitemap: https://www.vasconeves.com/sitemap.xml

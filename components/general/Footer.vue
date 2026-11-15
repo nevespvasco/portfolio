@@ -4,27 +4,18 @@
       &#169; {{ new Date().getFullYear() }} / Vasco Neves
     </span>
     <div class="footer-icons">
-      <IconsGithub
-        :size="{ width: '1.5em', height: '1.5em' }"
-        @click="handleIconRedirect('https://github.com/nevespvasco')"
-      ></IconsGithub>
-      <IconsLinkedin
-        :size="{ width: '1.5em', height: '1.5em' }"
-        @click="handleIconRedirect('https://www.linkedin.com/in/nevespvasco')"
-      ></IconsLinkedin>
-      <IconsEmail
-        :size="{ width: '1.5em', height: '1.5em' }"
-        @click="handleIconRedirect('mailto:nevespvasco+jobs@gmail.com')"
-      ></IconsEmail>
+      <a href="https://github.com/nevespvasco" aria-label="GitHub">
+        <IconsGithub :size="{ width: '1.5em', height: '1.5em' }"></IconsGithub>
+      </a>
+      <a href="https://www.linkedin.com/in/nevespvasco" aria-label="LinkedIn">
+        <IconsLinkedin :size="{ width: '1.5em', height: '1.5em' }"></IconsLinkedin>
+      </a>
+      <a href="mailto:nevespvasco+jobs@gmail.com" aria-label="Email">
+        <IconsEmail :size="{ width: '1.5em', height: '1.5em' }"></IconsEmail>
+      </a>
     </div>
   </footer>
 </template>
-
-<script setup lang="ts">
-const handleIconRedirect = (link: string) => {
-  if (link) window.location.href = link;
-};
-</script>
 
 <style lang="scss">
 footer {
@@ -44,8 +35,8 @@ footer {
 .footer-icons {
   display: flex;
   gap: 1.25rem;
-  svg {
-    cursor: pointer;
+  a {
+    color: inherit;
   }
 }
 

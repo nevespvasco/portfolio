@@ -19,7 +19,7 @@
       </defs>
     </svg>
 
-    <button id="gooey-button" @click="handleBookingRedirect">
+    <a id="gooey-button" href="https://book.schedly.io/nevespvasco">
       Book Now
       <span class="bubbles">
         <span class="bubble"></span>
@@ -33,15 +33,9 @@
         <span class="bubble"></span>
         <span class="bubble"></span>
       </span>
-    </button>
+    </a>
   </div>
 </template>
-
-<script lang="ts" setup>
-const handleBookingRedirect = () => {
-  window.location.href = "https://book.schedly.io/nevespvasco";
-};
-</script>
 
 <style lang="scss" scoped>
 $prime: var(--green);
@@ -54,6 +48,8 @@ svg {
 }
 
 #gooey-button {
+  display: inline-block;
+  text-decoration: none;
   cursor: pointer;
   font-weight: 700;
   padding: 0.6rem 2rem;

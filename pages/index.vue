@@ -24,32 +24,71 @@
           <h1 class="name">Vasco Neves</h1>
         </div>
         <div class="title-container">
-          <h2 class="title">Software Developer</h2>
+          <h2 class="title">Senior Frontend Engineer</h2>
         </div>
         <div class="social-container">
           <ul v-if="socialLinks.length > 0" class="social-list">
-            <li
-              v-for="social in socialLinks"
-              :key="social.id"
-              :class="['social-item']"
-              @click="handleLinkRedirect(social.link)"
-            >
-              <component
-                :is="social.iconName"
-                :size="{ width: '1.2em', height: '1.2em' }"
-              />
-              <span class="social-title">{{ social.title }}</span>
+            <li v-for="social in socialLinks" :key="social.id">
+              <a :href="social.link" class="social-item">
+                <component
+                  :is="social.iconName"
+                  :size="{ width: '1.2em', height: '1.2em' }"
+                />
+                <span class="social-title">{{ social.title }}</span>
+              </a>
             </li>
           </ul>
         </div>
       </div>
 
       <p class="bio">
-        I'm a Software Developer who loves turning ideas into interactive web
-        experiences that make people's lives easier. I get a real sense of
-        fulfillment from working with others to tackle tough problems, using my
-        technical skills to bring creative solutions to life
+        I build complex, data-heavy web applications with Vue 3, Nuxt and
+        TypeScript, where a wrong number or a broken state costs someone. I have
+        5+ years in frontend, from enterprise migrations and design systems to
+        test suites with Vitest and Playwright, and I ship the backend slice of
+        my own features too (Laravel, NestJS, PostgreSQL).
       </p>
+      <p class="bio availability">
+        Based in Lisbon, Portugal. Interested in senior frontend roles on
+        product teams, fully remote (UTC+0) or hybrid in Lisbon.
+      </p>
+
+      <section id="projects" class="projects">
+        <h2 class="section-title">Projects</h2>
+        <ul class="project-list">
+          <li v-for="project in projects" :key="project.slug" class="card">
+            <h3 class="card-title">
+              <NuxtLink :to="`/projects/${project.slug}`">{{ project.name }}</NuxtLink>
+            </h3>
+            <p class="card-outcome">{{ project.outcome }}</p>
+            <ul class="tag-list">
+              <li v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</li>
+            </ul>
+            <p class="card-links">
+              <NuxtLink :to="`/projects/${project.slug}`">Case study</NuxtLink>
+              <a v-if="project.repo" :href="project.repo">Repository</a>
+            </p>
+          </li>
+          <li v-for="work in workHighlights" :key="work.name" class="card">
+            <h3 class="card-title">{{ work.name }}</h3>
+            <p class="card-outcome">{{ work.outcome }}</p>
+            <ul class="tag-list">
+              <li v-for="tag in work.tags" :key="tag" class="tag">{{ tag }}</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section class="how-i-build">
+        <h2 class="section-title">How I build</h2>
+        <p class="bio">
+          I work AI-first every day with Claude Code and Cursor: I brief agents
+          on multi-file changes, review every diff they produce, and lean on
+          the test suites as guardrails. I own the decisions; the agents do the
+          typing.
+        </p>
+      </section>
+
       <div class="technical-skills-container">
         <h2 class="technical-skills-title">Technical Skills</h2>
         <div class="technical-skills-icons" v-if="technicalIcons.length > 0">
@@ -80,6 +119,10 @@
           </div>
         </div>
       </div>
+      <p class="bio skills-also">
+        Also: Vitest, Playwright, TanStack Query, NestJS, PostgreSQL, MySQL,
+        Figma, Claude API.
+      </p>
     </section>
     <section></section>
   </main>
@@ -101,6 +144,7 @@ import {
   IconsTailwindcss,
 } from "#components";
 import { type Component, markRaw } from "vue";
+import { projects, workHighlights } from "~/data/projects";
 
 const socialLinks = ref<
   {
@@ -118,7 +162,7 @@ const socialLinks = ref<
   },
   {
     id: 1,
-    title: "Linkedin",
+    title: "LinkedIn",
     iconName: markRaw(IconsLinkedin),
     link: "https://www.linkedin.com/in/nevespvasco",
   },
@@ -192,23 +236,18 @@ const technicalIcons = ref<
     id: 7,
     iconName: markRaw(IconsTypescript),
     isOver: false,
-    name: "Typescript",
+    name: "TypeScript",
     colorName: "#3178C6",
   },
   {
     id: 8,
     iconName: markRaw(IconsTailwindcss),
     isOver: false,
-    name: "Tailwindcss",
+    name: "Tailwind CSS",
     colorName: "#44a8b3",
   },
 ]);
 
-const handleLinkRedirect = (link: string) => {
-  if (link) {
-    window.location.href = link;
-  }
-};
 </script>
 
 <style lang="scss" scoped>
@@ -340,6 +379,8 @@ const handleLinkRedirect = (link: string) => {
 }
 
 .social-item {
+  color: inherit;
+  text-decoration: none;
   font-size: 0.95rem;
   cursor: pointer;
   display: flex;
@@ -353,6 +394,76 @@ const handleLinkRedirect = (link: string) => {
     background-color: var(--scheme-gray-600-10);
     border: 1px solid var(--scheme-gray-400);
   }
+}
+
+.availability {
+  color: var(--scheme-gray-800);
+}
+
+.section-title {
+  font-weight: 800;
+  font-size: 2.5rem;
+  line-height: initial;
+  margin: 2.5rem 0 1rem;
+}
+
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid var(--scheme-gray-600-30);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  background-color: var(--scheme-gray-600-10);
+}
+
+.card-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  a {
+    color: var(--white);
+  }
+}
+
+.card-outcome {
+  margin: 0 0 0.75rem;
+  line-height: 1.5rem;
+}
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.tag {
+  border: 1px solid var(--scheme-gray-300);
+  padding: 0.15rem 0.6rem;
+  border-radius: 1rem;
+}
+
+.card-links {
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  a {
+    color: var(--green);
+    font-weight: 500;
+  }
+}
+
+.skills-also {
+  color: var(--scheme-gray-800);
 }
 
 @media (min-width: 768px) {
