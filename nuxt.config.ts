@@ -22,16 +22,22 @@ export default defineNuxtConfig({
   },
   image: {
     format: ["avif", "webp"],
-    // On Vercel only these widths are allowed, so the 160px profile photo
-    // (and its 2x, 320) must be listed next to the default breakpoints.
+    // On Vercel only these widths are allowed, so every width the site asks
+    // for must be listed: the 160px profile photo (and its 2x), the project
+    // thumbnails and the project cards (each with its 2x), next to the
+    // default breakpoints.
     screens: {
       avatar: 160,
+      thumb: 240,
       xs: 320,
+      thumb2x: 480,
       sm: 640,
       md: 768,
+      card: 736,
       lg: 1024,
       xl: 1280,
       xxl: 1536,
+      card2x: 1472,
     },
   },
   nitro: {
