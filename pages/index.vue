@@ -48,10 +48,6 @@
         test suites with Vitest and Playwright, and I ship the backend slice of
         my own features too (Laravel, NestJS, PostgreSQL).
       </p>
-      <p class="bio availability">
-        Based in Lisbon, Portugal. Interested in senior frontend roles on
-        product teams, fully remote (UTC+0) or hybrid in Lisbon.
-      </p>
 
       <section id="projects" class="projects">
         <h2 class="section-title">Projects</h2>
@@ -394,10 +390,6 @@ const technicalIcons = ref<
     background-color: var(--scheme-gray-600-10);
     border: 1px solid var(--scheme-gray-400);
   }
-}
-
-.availability {
-  color: var(--scheme-gray-800);
 }
 
 .section-title {
