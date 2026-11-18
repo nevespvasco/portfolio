@@ -12,9 +12,9 @@ const email = "nevespvasco+jobs@gmail.com";
 
 export const site = {
   name: "Vasco Neves",
-  role: "Senior Frontend Engineer",
+  role: "Senior Software Engineer",
   description:
-    "Vasco Neves, Senior Frontend Engineer in Lisbon. Data-heavy Vue 3, Nuxt and TypeScript apps, tested with Vitest and Playwright.",
+    "Vasco Neves, Senior Software Engineer in Lisbon. Data-heavy Vue 3, Nuxt and TypeScript apps, tested with Vitest and Playwright.",
   url: "https://www.vasconeves.com",
   location: { city: "Lisbon", country: "Portugal", countryCode: "PT" },
   languages: ["Portuguese", "English"],
