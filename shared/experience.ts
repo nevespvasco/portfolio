@@ -26,7 +26,7 @@ export interface Education {
 export const roles: Role[] = [
   {
     company: "OFFX",
-    title: "Frontend Software Engineer",
+    title: "Software Engineer",
     start: "2025-03",
     paragraphs: [
       "OFFX is a venue for private-market liquidity: locked and liquid tokens, pre-IPO equity secondaries, fund secondaries and SPVs, used by 1,000+ institutional counterparties.",
