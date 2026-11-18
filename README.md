@@ -1,6 +1,6 @@
 # vasconeves.com
 
-Personal portfolio of Vasco Neves, Senior Frontend Engineer. Built with Nuxt 4 and deployed on Vercel.
+Personal portfolio of Vasco Neves, Senior Software Engineer. Built with Nuxt 4 and deployed on Vercel.
 
 ## Requirements
 

@@ -37,7 +37,7 @@ const circleMask = Buffer.from(
   `<svg width="${PHOTO}" height="${PHOTO}"><circle cx="${PHOTO / 2}" cy="${PHOTO / 2}" r="${PHOTO / 2}" fill="#fff"/></svg>`,
 );
 
-const photo = await sharp("public/img/profile.jpg")
+const photo = await sharp("public/img/vasco-neves.jpg")
   .resize(PHOTO, PHOTO, { fit: "cover" })
   .composite([{ input: circleMask, blend: "dest-in" }])
   .png()
