@@ -149,6 +149,7 @@ export const projects: Project[] = [
         bullets: [
           "Speaker identification from voice prints, clustered live, with one-click naming and voices remembered across meetings. After Stop, a second pass on pitch and timbre fixes misjudged lines and splits or rejoins voices.",
           "Your own notes plus the transcript become an overview, key points, decisions and action items with owners, through any OpenAI-compatible server (Ollama, LM Studio or a hosted API).",
+          "A live meeting assistant, off by default: when someone on the call asks a question, it drafts a short suggestion from your project notes and what was said, and marks anything the notes do not support. It also keeps a running summary of decisions, action items and open questions.",
           "Topics, a glossary and a people directory link meetings together, with a topic map and a ⌘K search over who said what.",
           "Imports and exports in the usual formats, and integrations with Google Calendar, Notion, Obsidian, Linear and signed webhooks.",
         ],
