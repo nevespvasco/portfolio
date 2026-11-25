@@ -113,6 +113,65 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "whisperbrain",
+    name: "WhisperBrain",
+    year: 2026,
+    role: "Solo developer",
+    status: "open-source",
+    featured: true,
+    cover: {
+      src: "/projects/whisperbrain/cover.webp",
+      alt: "A WhisperBrain meeting summary with an overview, key-point cards and a table of speakers with their talk time.",
+    },
+    gallery: [
+      {
+        src: "/projects/whisperbrain/gallery-1.webp",
+        alt: "The transcript in dark mode, each line labelled with its speaker, above a timeline of who spoke when.",
+        caption: "The transcript with each voice labelled and a timeline of who spoke when, in dark mode. Demo data.",
+      },
+    ],
+    outcome:
+      "A local-first meeting notepad for the desktop: records both sides of a call, transcribes on the device, labels who said what, and turns your notes into a summary with your own LLM.",
+    tags: ["JavaScript", "Electron", "Node.js", "SQLite", "On-device AI"],
+    repo: "https://github.com/nevespvasco/WhisperBrain",
+    sections: [
+      {
+        heading: "Problem",
+        paragraphs: [
+          "Meeting-notes tools usually send the audio of every call to someone else's cloud. I wanted the same help, a transcript that knows who spoke, a summary and a searchable history, with everything staying on my own computer.",
+        ],
+      },
+      {
+        heading: "Approach",
+        paragraphs: [
+          "An Electron app over a local Node.js server. The microphone and the computer's own audio are recorded as separate channels and transcribed on the device with sherpa-onnx; notes, transcripts and topics live in one SQLite file with full-text search. The interface is plain ES modules with no build step, in English and Portuguese, light and dark.",
+        ],
+        bullets: [
+          "Speaker identification from voice prints, clustered live, with one-click naming and voices remembered across meetings. After Stop, a second pass on pitch and timbre fixes misjudged lines and splits or rejoins voices.",
+          "Your own notes plus the transcript become an overview, key points, decisions and action items with owners, through any OpenAI-compatible server (Ollama, LM Studio or a hosted API).",
+          "Topics, a glossary and a people directory link meetings together, with a topic map and a ⌘K search over who said what.",
+          "Imports and exports in the usual formats, and integrations with Google Calendar, Notion, Obsidian, Linear and signed webhooks.",
+        ],
+      },
+      {
+        heading: "Key decisions",
+        bullets: [
+          "Audio is never stored: it is transcribed in memory, and the only text that leaves the machine goes to the LLM server you choose.",
+          "The local server listens on 127.0.0.1 only, with a per-launch token and checks on Host and Origin headers.",
+          "Only three things differ per operating system (audio capture, microphone-in-use detection and paste), so each is a small platform adapter, with native helpers in C, Swift and C++ where the OS needs them.",
+        ],
+      },
+      {
+        heading: "Result",
+        bullets: [
+          "Installers for Linux, macOS and Windows on GitHub Releases, built and published by GitHub Actions.",
+          "700+ tests, including integration tests with real speech models, PipeWire audio capture and a headless boot of the packaged app.",
+          "Developed and tested on Linux; the macOS and Windows adapters are unit-tested but not yet run on real hardware, and the README says so.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "a-minha-rua",
     name: "A Minha Rua",
     live: "https://a-minha-rua.vercel.app",

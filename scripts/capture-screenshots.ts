@@ -11,6 +11,8 @@
 //     FILEBRIDGE_APP_URL to include it. Cirnota's app is private, so only
 //     its public marketing pages are ever captured;
 //   - artwork copied from the project's own repository (ARTWORK_DIR);
+//   - WhisperBrain's README screenshots (demo data), from its repository
+//     (WHISPERBRAIN_DIR);
 //   - a generated cover for projects without a UI (PushGuard).
 //
 // PW_CHROMIUM_PATH points Playwright at an existing Chromium.
@@ -26,6 +28,7 @@ const outDir = (slug: string) => join("public", "projects", slug);
 
 const home = homedir();
 const artwork = process.env.ARTWORK_DIR ?? join(home, "Documents/github/isometric-lisbon");
+const whisperbrain = process.env.WHISPERBRAIN_DIR ?? join(home, "Documents/github/whisperbrain");
 
 type Capture = (page: Page) => Promise<void>;
 
@@ -33,8 +36,8 @@ interface Shot {
   project: string;
   /** File name without extension, e.g. "cover" or "gallery-1". */
   name: string;
-  /** Page to capture, or an image file to convert. */
-  source: { url: string; before?: Capture; locale?: string } | { file: string };
+  /** Page to capture, or an image file to convert (`crop` fills the frame instead of letterboxing). */
+  source: { url: string; before?: Capture; locale?: string } | { file: string; crop?: boolean };
 }
 
 const settle = (ms: number): Capture => (page) => page.waitForTimeout(ms);
@@ -80,6 +83,16 @@ const shots: Shot[] = [
     project: "cirnota",
     name: "gallery-3",
     source: { url: "https://cirnota.pt/", before: cirnotaSection("cap-curriculo") },
+  },
+  {
+    project: "whisperbrain",
+    name: "cover",
+    source: { file: join(whisperbrain, "docs/screenshots/meeting-summary.png"), crop: true },
+  },
+  {
+    project: "whisperbrain",
+    name: "gallery-1",
+    source: { file: join(whisperbrain, "docs/screenshots/transcript.png"), crop: true },
   },
 ];
 
@@ -142,10 +155,13 @@ try {
   for (const shot of todo) {
     if ("file" in shot.source) {
       if (!(await stat(shot.source.file).catch(() => null))) {
-        console.warn(`skipped ${shot.project}/${shot.name}: ${shot.source.file} not found (set ARTWORK_DIR)`);
+        console.warn(
+          `skipped ${shot.project}/${shot.name}: ${shot.source.file} not found (set ARTWORK_DIR or WHISPERBRAIN_DIR)`,
+        );
         continue;
       }
-      await saveArtwork(shot.source.file, shot.project, shot.name);
+      if (shot.source.crop) await save(shot.source.file, shot.project, shot.name);
+      else await saveArtwork(shot.source.file, shot.project, shot.name);
       continue;
     }
     const context = await browser.newContext({

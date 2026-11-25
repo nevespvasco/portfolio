@@ -51,4 +51,4 @@ npm run og:projects                          # per-project 1200x630 JPEG for lin
 npm run og:card                              # the site-wide Open Graph card
 ```
 
-`screenshots` copies the A Minha Rua artwork from its own repository (`ARTWORK_DIR`, default `~/Documents/github/isometric-lisbon`) and skips it with a warning when that is missing. It can also capture filebridge running locally in its mock mode (`VITE_MOCK=1`, demo data only): set `FILEBRIDGE_APP_URL`. Cirnota's app is private, so only its public marketing pages are captured. Look at every image before committing it.
+`screenshots` copies the A Minha Rua artwork from its own repository (`ARTWORK_DIR`, default `~/Documents/github/isometric-lisbon`) and skips it with a warning when that is missing. It can also capture filebridge running locally in its mock mode (`VITE_MOCK=1`, demo data only): set `FILEBRIDGE_APP_URL`. WhisperBrain's images are the demo-data screenshots from its README (`WHISPERBRAIN_DIR`, default `~/Documents/github/whisperbrain`). Cirnota's app is private, so only its public marketing pages are captured. Look at every image before committing it.
