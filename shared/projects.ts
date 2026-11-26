@@ -94,20 +94,23 @@ export const projects: Project[] = [
         ],
         bullets: [
           "Records are organised by hospital and cover surgeries, training and scientific activity.",
+          "Each doctor keeps their own lists of procedures and diagnoses, organised the way their supervisor asks, after a tester said it had to be customisable or nobody would use it.",
         ],
       },
       {
         heading: "Key decisions",
         bullets: [
-          "Privacy and security built in from day one: least-privilege data access, two-factor login and an audit trail.",
-          "Decisions recorded as architecture decision records (9 so far).",
+          "The CV is a view of the portfolio, not a copy: a doctor writes each thing once and can keep several CVs that all stay up to date.",
+          "The PDF is drawn in the browser by the same component as the preview, so what you see is exactly what you download, and that code only loads on the CV page.",
+          "Exports match the screen: the visible columns, in the same order, with the same labels and formatting, after users said the spreadsheet did not match the table.",
+          "Privacy and security built in from day one, and decisions recorded as architecture decision records.",
         ],
       },
       {
         heading: "Result",
         bullets: [
           "Live at cirnota.pt.",
-          "CI on every change: typecheck, lint, tests, a dependency audit and a production boot smoke test, with separate staging and production deploy pipelines.",
+          "Typecheck, lint and tests on every change, with separate staging and production deploys.",
         ],
       },
     ],
